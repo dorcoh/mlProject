@@ -32,7 +32,6 @@ def getXY(textObj):
 	cats = getCats(textObj)
 	X = []
 	Y = []
-	D = []
 	# iterate over all docs
 	for i in range(0, len(textObj)):
 		# iterate over all categories
@@ -48,7 +47,6 @@ def getXY(textObj):
 						s += item[j] + ' '
 					else:
 						s += item[j] + '\n'
-			D.append(i)
 			X.append(s)
 			Y.append(c)
 	return X,Y
@@ -87,7 +85,7 @@ def binScore(score):
 	# 6-10 -> Negative (False)
 	if int(score) <= 5:
 		return False
-	elif int(score) > 5:
+	else:
 		return True
 
 def getXYScore(textObj):
@@ -147,7 +145,7 @@ def dupl(i, text):
 		res = res + text
 	return res
 
-def balancingB(x,y):
+def balancing(x,y):
 	xres=[]
 	yres=[]
 	total = len(x)
@@ -186,47 +184,6 @@ def balancingB(x,y):
 					xres.append(x[i])
 					yres.append(y[i])
 					fCount -= 1
-	return xres,yres
-
-def balancing(x,y):
-	xres=[]
-	yres=[]
-	total = len(x)
-	fCount, tCount = 0, 0
-	for i in range(0,len(x)):
-		if y[i] == False:
-			fCount += 1
-	tCount = total-fCount
-
-	if tCount < fCount:
-		smaller = True
-	elif tCount > fCount:
-		smaller = False
-	else:
-		return x,y
-	ftratio = float(fCount)/tCount
-	# True is smaller
-	length = len(x)
-	if smaller:
-		for i in range(0,length):
-			if y[i] == True:
-				for s in range(0,int(ftratio)):
-					xres.append(x[i])
-					yres.append(y[i])
-			else:
-				xres.append(x[i])
-				yres.append(y[i])
-					
-	else:
-		for i in range(0,length):
-			if y[i] == False:
-				for s in range(0,int(1/ftratio)):
-					xres.append(x[i])
-					yres.append(y[i])
-			else:
-				xres.append(x[i])
-				yres.append(y[i])
-
 	return xres,yres
 
 if __name__ == '__main__':
@@ -292,7 +249,7 @@ if __name__ == '__main__':
 	print "_______________________________________________________"
 
 	xTrainScore, yTrainScore = getXYScoreWithoutFirst(textObjTrain)
-	xTrainScore, yTrainScore = balancing(xTrainScore, yTrainScore)
+	#xTrainScore, yTrainScore = balancing(xTrainScore, yTrainScore)
 
 	xTestScore, yTestScore = getXYScoreWithoutFirst(textObjTest)
 	
@@ -324,7 +281,15 @@ if __name__ == '__main__':
 	print "_______________________________________________________"
 	print "		predict prob aspect"
 	print "_______________________________________________________"
+	"""
+	xTrain, yTrain = getXYwithoutFirstSent(textObjTrain)
+	xTest, yTest = getXYwithoutFirstSent(textObjTest)
+	
+	xTrainScore, yTrainScore = getXYScoreWithoutFirst(textObjTrain)
+	xTrainScore, yTrainScore = balancing(xTrainScore, yTrainScore)
 
+	xTestScore, yTestScore = getXYScoreWithoutFirst(textObjTest)
+	"""
 	# create NB classifier pipeline
 	text_clf_nb = Pipeline([('vect', CountVectorizer()),
 						 ('tfidf', TfidfTransformer()),
@@ -351,10 +316,11 @@ if __name__ == '__main__':
 	# create modified test and training set
 	xTestMod = []
 	for i in range(0, len(xTestScore)):
-		xTestMod.append(dupl(1,"cat:" + predicted[i]+" ")+xTestScore[i])
+		xTestMod.append(dupl(5,"cat:" + predicted[i]+" ")+xTestScore[i])
+
 	xTrainMod = []
 	for i in range(0, len(xTrainScore)):
-		xTrainMod.append(dupl(1," cat:" + predictedTraining[i])+xTrainScore[i])
+		xTrainMod.append(dupl(5," cat:" + predictedTraining[i])+xTrainScore[i])
 
 	text_clf = text_clf_nb.fit(xTrainMod, yTrainScore)
 	predicted = text_clf.predict(xTestMod)
