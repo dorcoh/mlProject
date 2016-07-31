@@ -109,7 +109,35 @@ def getXYScore(textObj):
 					else:
 						s += item[j] + '\n'
 			X.append(s)
-	return X,Y	
+	return X,Y
+
+def getXYScoreWithoutFirst(textObj):
+	# get X - paragraphs, Y - score
+	cats = getCats(textObj)
+	X = []
+	Y = []
+	# iterate over all docs
+	for i in range(0, len(textObj)):
+		# iterate over all categories
+		for c in cats:
+			Y.append(binScore(textObj[i][c]['score']))
+			s = ''
+			# iterate over all sentences
+			if len(textObj[i][c]['sents']) == 1 and len(textObj[i][c]['sents'][0]) <= 5:
+				continue
+			for k in range(0, len(textObj[i][c]['sents'])-1):
+				# continue if sentence is first and <= 3
+				if k==0 and len(textObj[i][c]['sents'][0]) <= 5:
+					continue
+				# iterate over all words
+				# recreate sentence
+				for j in range(0, len(textObj[i][c]['sents'][k])):
+					if j != len(textObj[i][c]['sents'][k])-1:
+						s += textObj[i][c]['sents'][k][j] + ' '
+					else:
+						s += textObj[i][c]['sents'][k][j] + '\n'
+			X.append(s)
+	return X,Y
 
 if __name__ == '__main__':
 	# load data
@@ -139,6 +167,13 @@ if __name__ == '__main__':
 	# naive bayes clf
 	text_clf = text_clf_nb.fit(xTrain, yTrain)
 	predicted = text_clf.predict(xTest)
+	prob = text_clf.predict_proba(xTest)
+
+	"""
+	for p in prob:
+		print text_clf.classes_, p
+	"""
+
 	print "Accuracy NB={0}".format(np.mean(predicted==yTest))
 	print "Confusion matrix:"
 	print metrics.confusion_matrix(yTest, predicted)
@@ -166,8 +201,8 @@ if __name__ == '__main__':
 	print "		predict scores"
 	print "_______________________________________________________"
 
-	xTrain, yTrain = getXYScore(textObjTrain)
-	xTest, yTest = getXYScore(textObjTest)
+	xTrain, yTrain = getXYScoreWithoutFirst(textObjTrain)
+	xTest, yTest = getXYScoreWithoutFirst(textObjTest)
 
 	# naive bayes clf
 	text_clf = text_clf_nb.fit(xTrain, yTrain)
@@ -191,3 +226,26 @@ if __name__ == '__main__':
 	print "Accuracy SVM={0}".format(np.mean(predicted==yTest))
 	print "Confusion matrix:"
 	print metrics.confusion_matrix(yTest, predicted)
+	
+	# Second pipeline
+
+	print "_______________________________________________________"
+	print "		predict prob aspect"
+	print "_______________________________________________________"
+	
+	xTrain, yTrain = getXYwithoutFirstSent(textObjTrain)
+	xTest, yTest = getXYwithoutFirstSent(textObjTest)
+
+	# create NB classifier pipeline
+	text_clf_nb = Pipeline([('vect', CountVectorizer()),
+						 ('tfidf', TfidfTransformer()),
+						 ('clf', MultinomialNB()),
+	])
+
+	# create SVM classifier pipeline
+	text_clf_svm = Pipeline([('vect', CountVectorizer()),
+						 ('tfidf', TfidfTransformer()),
+						 ('clf', SGDClassifier(loss='hinge', penalty='l2',
+						  					   alpha=1e-3, n_iter=5,
+						  					   random_state=42)),
+	])	
