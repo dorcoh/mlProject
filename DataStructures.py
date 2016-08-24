@@ -261,3 +261,140 @@ def printRes(title,predicted,yTest,cats=None):
                                             target_names=cats))
     print
     return acc
+
+def svmClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest):
+    """
+        Classifies samples using svm pipeline
+        That works as the following:
+        Data -> CountVectorizer -> TfidfTransformer -> Classifier
+
+        Implements two classifiers as following:
+        (1)
+            X - Paragraps, Y - Aspect (category)
+        (2)
+            X - Paragraphs, Y - Sentiment (True,False)
+
+    """
+    # predict
+    p = Pipe()
+
+    clf = p.svmpipeline.fit(xTrain, yTrain.cat)
+    predicted = clf.predict(xTest)
+    printRes("SVM-category",predicted,yTest.cat,testData.catCat)
+
+    clf = p.svmpipeline.fit(xTrain, yTrain.score)
+    predicted = clf.predict(xTest)
+    printRes("SVM-score",predicted,yTest.score)
+
+    clf = p.svmpipeline.fit(xTrain, yTrain.trueScore)
+    predicted = clf.predict(xTest)
+    
+    for i in range(0, len(predicted)):
+        if predicted[i] >= 5:
+            predicted[i] = True
+        else:
+            predicted[i] = False
+
+    printRes("SVM-**SCORE**",predicted,yTest.score)
+    #printRes("SVM-true score",predicted,yTest.trueScore)"""
+
+def normaClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest):
+    """
+        Classifier:
+            X - Parargraps, Y - Aspect (category)
+
+        Classifies samples by computing the norma (of scores)
+        Between a test sample and all training samples
+        And then smooth the scores using weights
+        The weights are computed by how near is the vector
+        to other vectors in the training set
+        (scores are for example [4,5,6,9] - one for each category)
+
+        Params:
+            x,y,length (train)
+            x,y,length (test)
+            
+
+        Prints results
+    """
+    # generate predicted - predicted samples from test set
+    p = Pipe()
+    clf = p.svmpipeline.fit(xTrain, yTrain.trueScore)
+    predicted = clf.predict(xTest)
+    # append all document's scores to vector of size 4
+    # [scoreMovie, scoreExtras, scoreVideo, scoreAudio]
+    # training scores
+    scoresTrain = [[0,0,0,0] for i in range(docsTrain)]
+    for i in range(0, len(xTrain)):
+        scoresTrain[yTrain.doc[i]][catDict[yTrain.cat[i]]] = yTrain.trueScore[i]
+
+    # testing scores (predicted)
+    scoresTest = [[0,0,0,0] for i in range(docsTest)]
+    for i in range(0, len(xTest)):
+        scoresTest[yTest.doc[i]][catDict[yTest.cat[i]]] = predicted[i]
+
+    # compute difference between each score vector 
+    # in test and all training score vector = 
+    fixScores = [[0,0,0,0] for i in range(docsTest)]
+    fixedPredicted = [[0,0,0,0] for i in range(docsTest)]
+    # iterating over all scores (test)
+    for i in range(0, len(scoresTest)):
+        # create vector of lentgh 4 from test scores (predicted)
+        a = np.array(scoresTest[i])
+        weightSum = 0
+        tempFixScore = [0, 0, 0, 0]
+        # iterate over all scores (train)
+        for j in range(0, len(scoresTrain)):
+            # create vector of lentgh 4 from train scores
+            b = np.array(scoresTrain[j])
+            # compute norma between 
+            weight = np.linalg.norm(a-b)
+            # compute weights for fix
+            # if the norma is zero
+            if weight == 0:
+                # give maximum weight
+                weight = (2)**3
+            else:
+                # else give weight: (1/norm)^3
+                weight = (float(1) / weight)**3
+            # sum all weights, for normalizing later
+            weightSum += weight
+            # apply weight for all training scores
+            weightedScore = [weight*s for s in scoresTrain[j]]
+            # 
+            tempFixScore = [a+b for a,b in zip(tempFixScore, weightedScore)]
+        #print tempFixScore
+        fixScores[i] = [float(a)/weightSum for a in tempFixScore]
+        #print "Last:{0} , Predicted: {1}".format(fixScores[i], scoresTest[i])
+        fixedPredicted[i] = [float(0.05*a)+float(0.95*b) for a,b in zip(fixScores[i], scoresTest[i])]
+        #print "Fixed: {0}".format(fixedPredicted)
+        #sys.exit(2)
+    
+    # transform doc array to paragraph array ([[1,2,3,4]] -> [1,2,3,4])
+    #print fixedPredicted
+    newPredicted = []
+    for i in range(0, len(fixedPredicted)):
+        for j in range(0, 4):
+            newPredicted.append(fixedPredicted[i][j])
+
+    # transform predicted score to True/False
+    for i in range(0, len(newPredicted)):
+        if newPredicted[i] >= 5:
+            newPredicted[i] = True
+        else:
+            newPredicted[i] = False
+
+    clf = p.svmpipeline.fit(xTrain, yTrain.score)
+    predicted = clf.predict(xTest)
+    newPredicted = np.array(newPredicted)
+    printRes("SVM-SmoothedScore",newPredicted,yTest.score)
+    printRes("SVM-old-trueScore",predicted,yTest.score)
+
+def groupData(x,y,numOfDocs):
+    # group scores by document, e.g [6,5,4,9]
+
+    scores = [[0,0,0,0] for i in range(numOfDocs)]
+    for i in range(0, len(x)):
+        scores[y.doc[i]][catDict[y.cat[i]]] = y.score[i]
+
+    return scores
