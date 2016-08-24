@@ -201,6 +201,49 @@ def filterData(x,y,cat,value):
 
     return badIndexes
 
+def genClfs(xTrain,yTrain,xTest,yTest):
+    """
+        This function generates 9 different classifiers:
+        1st - clf on xTrain
+        2nd - clf on xTrain:A=0
+        3rd - clf on xTrain:A=1
+        4th - clf on xTrain:B=0
+        and so on... (A=0,A=1,B=0,B=1,C=0,C=1,D=0,D=1)
+
+        returns:
+            clfList - a dict of classifiers
+            allSet - a corresponding dict of training sets
+
+    """
+
+    p = Pipe()
+    baseSet = [('-1',(xTrain, yTrain))]
+    allSet = copy.deepcopy(baseSet)
+    translator = [False, True]
+
+    # generate list of tuples (id, training set)
+    numOfAspects = 4
+    for cat in range(0,numOfAspects):
+        for value in range(0,2):
+            key = str('-1,') + '{0}:{1}'.format(cat,value)
+            # find indexes to delete
+            badIndexes = filterData(xTrain,yTrain,cat,translator[value])
+            newX = copy.deepcopy(xTrain)
+            newY = copy.deepcopy(yTrain)
+            # delete data
+            multi_delete(newX,badIndexes)
+            newY.removeItems(badIndexes)
+            # append new training set
+            allSet.append((key,(newX,newY)))
+
+    clfList = []
+    # train classifiers
+    for tup in allSet:
+        clf = p.svmpipeline.fit(tup[1][0],tup[1][1].score)
+        clfList.append((tup[0],copy.deepcopy(clf)))
+
+    return dict(clfList),dict(allSet)
+
 def generateClassifiers(xTrain, yTrain,xTest,yTest,order):
     """
         This function generates 15 different classifiers
@@ -275,6 +318,106 @@ def chooseSample(xTest, yTest, docId, aspect):
     y.doc.append(yTest.doc[i])
 
     return x,y
+
+"""
+first compute by standard classifier
+where v = sample (doc)
+P_0(A=0|v[0]),P_0(A=1|v[0])
+P_0(B=0|v[1]),P_0(B=1|v[1])
+P_0(C=0|v[2]),P_0(C=1|v[2])
+P_0(D=0|v[3]),P_0(D=1|v[3])
+
+then create 8 classifiers from the following train data:
+A=0,A=1,B=0,B=1,C=0,C=1,D=0,D=1
+
+compute
+P_b0(A|v),P_b1(A|v)
+P_c0(A|v),P_c1(A|v)
+P_d0(A|v),P_d1(A|v)
+
+then iterate over this until P_t+1-P_t <= epsilon:
+P_t+1(A|v) * 3 = 
+P_t(B=0|v)*P_b0(A|v)+P_t(B=1|v)*P_b1(A|v)+
+P_t(C=0|v)*P_c0(A|v)+P_t(C=1|v)*P_c1(A|v)+
+P_t(D=0|v)*P_d0(A|v)+P_t(D=1|v)*P_d1(A|v)
+"""
+
+def predSamp(xTest,yTest,docId,clfDict,setsDict):
+    """
+        This function predicts label for a single sample (document)
+        By iterating on the following equation (for each aspect)
+
+        P_t+1(A|v) * 3 = 
+        P_t(B=0|v)*P_b0(A|v)+P_t(B=1|v)*P_b1(A|v)+
+        P_t(C=0|v)*P_c0(A|v)+P_t(C=1|v)*P_c1(A|v)+
+        P_t(D=0|v)*P_d0(A|v)+P_t(D=1|v)*P_d1(A|v)
+    """
+    # append all four paragraphs to x
+    order = [0,1,2,3]
+    x = []
+    for i in order:
+        data,labels = chooseSample(xTest,yTest,docId,i)
+        x.append(data)
+
+    mainKey = '-1'
+    clf = clfDict[mainKey]
+
+    # compute P_0(A|v[0]),P_0(B|v[1]),P_0(C|v[2]),P_0(D|v[3])
+    probsA = clf.predict_proba(x[0])[0]
+    probsB = clf.predict_proba(x[1])[0]
+    probsC = clf.predict_proba(x[2])[0]
+    probsD = clf.predict_proba(x[3])[0]
+
+    epsilon = 0.0001
+    while (1):
+        Pa = (probsB[0]*clfDict['-1,1:0'].predict_proba(x[0])+
+              probsB[1]*clfDict['-1,1:1'].predict_proba(x[0])+
+              probsC[0]*clfDict['-1,2:0'].predict_proba(x[0])+
+              probsC[1]*clfDict['-1,2:1'].predict_proba(x[0])+
+              probsD[0]*clfDict['-1,3:0'].predict_proba(x[0])+
+              probsD[1]*clfDict['-1,3:1'].predict_proba(x[0]))/3
+
+        Pb = (probsA[0]*clfDict['-1,0:0'].predict_proba(x[1])+
+              probsA[1]*clfDict['-1,0:1'].predict_proba(x[1])+
+              probsC[0]*clfDict['-1,2:0'].predict_proba(x[1])+
+              probsC[1]*clfDict['-1,2:1'].predict_proba(x[1])+
+              probsD[0]*clfDict['-1,3:0'].predict_proba(x[1])+
+              probsD[1]*clfDict['-1,3:1'].predict_proba(x[1]))/3
+
+        Pc = (probsA[0]*clfDict['-1,0:0'].predict_proba(x[2])+
+              probsA[1]*clfDict['-1,0:1'].predict_proba(x[2])+
+              probsB[0]*clfDict['-1,1:0'].predict_proba(x[2])+
+              probsB[1]*clfDict['-1,1:1'].predict_proba(x[2])+
+              probsD[0]*clfDict['-1,3:0'].predict_proba(x[2])+
+              probsD[1]*clfDict['-1,3:1'].predict_proba(x[2]))/3
+
+        Pd = (probsA[0]*clfDict['-1,0:0'].predict_proba(x[3])+
+              probsA[1]*clfDict['-1,0:1'].predict_proba(x[3])+
+              probsB[0]*clfDict['-1,1:0'].predict_proba(x[3])+
+              probsB[1]*clfDict['-1,1:1'].predict_proba(x[3])+
+              probsC[0]*clfDict['-1,2:0'].predict_proba(x[3])+
+              probsC[1]*clfDict['-1,2:1'].predict_proba(x[3]))/3
+        
+        a = [probsA[0],probsB[0],probsC[0],probsD[0]]
+        b = [Pa[0][0], Pb[0][0], Pc[0][0], Pd[0][0]]
+        a = np.array(a)
+        b = np.array(b)
+
+        probsA, probsB, probsC, probsD = Pa[0],Pb[0],Pc[0],Pd[0] 
+
+        if np.linalg.norm(a-b) < 0.0001:
+            break
+
+    result = [None,None,None,None]
+
+    probs = [probsA,probsB,probsC,probsD]
+    for i in range(0,4):
+        if probs[i][0] > probs[i][1]:
+            result[i] = False
+        else:
+            result[i] = True
+
+    return result
 
 def predictSample(xTest,yTest,docId,clfDict,setsDict,misDict,order):
     """
@@ -368,6 +511,26 @@ def predictSample(xTest,yTest,docId,clfDict,setsDict,misDict,order):
 
     return result
 
+def sClassifier(xTrain,yTrain,xTest,yTest):
+    clfList, allSet = genClfs(xTrain,yTrain,xTest,yTest)
+    predScores = []
+
+    for doc in range(0, len(xTest)/4):
+        docScores = predSamp(xTest,yTest,doc,clfList,allSet)
+        for i in range(0,4):
+            predScores.append(docScores[i])
+
+    mainKey = '-1'
+    clf = dict(clfList)[mainKey]
+
+    baselinePred = clf.predict(xTest)
+    baselinePred = np.array(baselinePred)
+    predScores = np.array(predScores)
+
+    printRes('base',baselinePred ,yTest.score)
+    printRes('sup', predScores, yTest.score)
+
+
 def superbClassifier(xTrain,yTrain,xTest,yTest,order):
     """
         This function implemenets a classifier
@@ -411,7 +574,14 @@ if __name__ == '__main__':
 
     xTrain, yTrain, docsTrain = trainData.x, trainData.y, trainData.docs
     xTest, yTest, docsTest = testData.x, testData.y, testData.docs
+    
+    #clfList, allSet = genClfs(xTrain,yTrain,xTest,yTest)
+    #predSamp(xTest,yTest,23,clfList,allSet)
+
+    sClassifier(xTrain,yTrain,xTest,yTest)
     #svmClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest)
+    
+    """
     lst = [0,1,2,3]
     perms = list(itertools.permutations(lst))
     maxacc = 0
@@ -423,6 +593,7 @@ if __name__ == '__main__':
             maxOrder = list(p)
 
     print maxOrder,maxacc
+    """
     # assumption checking
     #plotStats(xTrain,yTrain,docsTrain,xTest,yTest,docsTest)
     
