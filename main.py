@@ -95,7 +95,7 @@ if __name__ == '__main__':
     newY = copy.deepcopy(yTrain)
 
     print len(newX), len(newY.cat)
-    badIndexes = filterData(newX, newY, 1, False)
+    badIndexes = filterData(newX, newY, 1, True, 1)
     multi_delete(newX,badIndexes)
     newY.removeItems(badIndexes)
     print len(newX), len(newY.cat)

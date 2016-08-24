@@ -46,17 +46,22 @@ def filterData(x,y,cat,value,requiredCat=None):
             if determine(y.cat[i],y.score[i],cat,value):
                 # append doc num of 'bad' docs
                 elems.add(y.doc[i])
+        # if any 'bad' pargraph - remove whole document
+        badIndexes = []
+        for i in range(0, len(x)):
+            if y.doc[i] in elems:
+                badIndexes.append(i)
+
     # or filter also by cat
     else:
         for i in range(0,len(x)):
-            if (determine(y.cat[i],y.score[i],cat,value) or catDict[y.cat[i]] != requiredCat):
-                elems.add(y.doc[i])    
+            # filter by aspect
+            if catDict[y.cat[i]] != requiredCat:
+                print catDict[y.cat[i]], requiredCat, i
+                elems.add(i)
 
-    # find all 'bad' paragraphs indexes
-    badIndexes = []
-    for i in range(0, len(x)):
-        if y.doc[i] in elems:
-            badIndexes.append(i)
+            badIndexes = list(elems)
+            # filter by cat=value  
 
     return badIndexes
 
