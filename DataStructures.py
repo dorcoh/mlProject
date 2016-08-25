@@ -1,5 +1,6 @@
 """
-    Module for all of our needed classes and functions
+    Module for implementation of classes, functions,
+    and scikit classifiers
 """
 import json
 from sklearn.datasets import fetch_20newsgroups
@@ -11,6 +12,13 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.grid_search import GridSearchCV
 from sklearn import metrics
 import numpy as np
+
+catDict = {
+    u'movie': 0,
+    u'extras': 1,
+    u'video': 2,
+    u'audio': 3
+}
 
 def multi_delete(list_, elems):
     # delete multiple elements from a list in parallel
@@ -268,12 +276,17 @@ def svmClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest, catList):
         That works as the following:
         Data -> CountVectorizer -> TfidfTransformer -> Classifier
 
-        Implements two classifiers as following:
+        Implements three classifiers as following:
         (1)
             X - Paragraps, Y - Aspect (category)
         (2)
-            X - Paragraphs, Y - Sentiment (True,False)
-
+            Train on 
+            X - Paragraph, Y - Sentiment (True,False)
+            Output Sentiment
+        (3)
+            Train on 
+            X - Paragraph, Y - Score (1-10)
+            Output sentiment
     """
     # predict
     p = Pipe()
@@ -284,7 +297,7 @@ def svmClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest, catList):
 
     clf = p.svmpipeline.fit(xTrain, yTrain.score)
     predicted = clf.predict(xTest)
-    printRes("SVM-score",predicted,yTest.score)
+    printRes("SVM-score (Trained on score)",predicted,yTest.score)
 
     clf = p.svmpipeline.fit(xTrain, yTrain.trueScore)
     predicted = clf.predict(xTest)
@@ -295,8 +308,7 @@ def svmClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest, catList):
         else:
             predicted[i] = False
 
-    printRes("SVM-**SCORE**",predicted,yTest.score)
-    #printRes("SVM-true score",predicted,yTest.trueScore)"""
+    printRes("SVM-score (Trained on rating: 1-10)",predicted,yTest.score)
 
 def normaClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest):
     """
@@ -384,11 +396,8 @@ def normaClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest):
         else:
             newPredicted[i] = False
 
-    clf = p.svmpipeline.fit(xTrain, yTrain.score)
-    predicted = clf.predict(xTest)
     newPredicted = np.array(newPredicted)
-    printRes("SVM-SmoothedScore",newPredicted,yTest.score)
-    printRes("SVM-old-trueScore",predicted,yTest.score)
+    printRes("Norma CLF: SVM-SmoothedScore",newPredicted,yTest.score)
 
 def groupData(x,y,numOfDocs):
     # group scores by document, e.g [6,5,4,9]
