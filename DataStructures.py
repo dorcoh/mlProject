@@ -262,7 +262,7 @@ def printRes(title,predicted,yTest,cats=None):
     print
     return acc
 
-def svmClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest):
+def svmClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest, catList):
     """
         Classifies samples using svm pipeline
         That works as the following:
@@ -280,7 +280,7 @@ def svmClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest):
 
     clf = p.svmpipeline.fit(xTrain, yTrain.cat)
     predicted = clf.predict(xTest)
-    printRes("SVM-category",predicted,yTest.cat,testData.catCat)
+    printRes("SVM-category",predicted,yTest.cat,catList)
 
     clf = p.svmpipeline.fit(xTrain, yTrain.score)
     predicted = clf.predict(xTest)

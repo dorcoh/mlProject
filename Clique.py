@@ -386,7 +386,7 @@ def sClassifier(xTrain,yTrain,xTest,yTest):
     mainKey = '-1'
     clf = dict(clfList)[mainKey]
 
-    printRes('Pairwise-Dependencies-CLF', predScores, yTest.score)
+    printRes('Pairwise-trained by all aspects', np.array(predScores), yTest.score)
 
 def superbClassifier(xTrain,yTrain,xTest,yTest,order):
     """
@@ -396,7 +396,7 @@ def superbClassifier(xTrain,yTrain,xTest,yTest,order):
 
         Prints results (accuracy, confusion matrix)
     """
-    # misDict = {0:0, 1:0, 2:0, 3:0}
+    misDict = {0:0, 1:0, 2:0, 3:0}
 
     # gets classifiers dict, training sets dict
     clfList, allSet = generateClassifiers(xTrain, yTrain, xTest,yTest,order)
@@ -419,5 +419,5 @@ def superbClassifier(xTrain,yTrain,xTest,yTest,order):
     baselinePred = np.array(baselinePred)
     predScores = np.array(predScores)
     # print results
-    acc = printRes('superb',predScores,yTest.score)
+    acc = printRes('One-direction-dependency',predScores,yTest.score)
     return acc
