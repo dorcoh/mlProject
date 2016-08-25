@@ -95,13 +95,13 @@ if __name__ == '__main__':
     newY = copy.deepcopy(yTrain)
 
     print len(newX), len(newY.cat)
-    badIndexes = filterData(newX, newY, 1, True, 1)
+    badIndexes = filterData(newX, newY, 1, True, 0)
     multi_delete(newX,badIndexes)
     newY.removeItems(badIndexes)
     print len(newX), len(newY.cat)
 
     for i in range(0,len(newY.cat)):
-        print "Cat:{0},Val:{1}".format(catDict[newY.cat[i]],int(newY.score[i]))
+        print "Doc:{0},Cat:{1},Val:{2}".format(newY.doc[i],catDict[newY.cat[i]],int(newY.score[i]))
     # classifiers check
     # svmClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest)
     # normaClassifier(xTrain, yTrain, docsTrain, xTest, yTest, docsTest)

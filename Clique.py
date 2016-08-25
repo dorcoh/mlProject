@@ -40,28 +40,26 @@ def filterData(x,y,cat,value,requiredCat=None):
     elems = set()
     # find all 'bad' docs indexes
     # filter only by cat=value
-    if requiredCat==None:
-        for i in range(0,len(x)):
-            # if paragraph should be removed
-            if determine(y.cat[i],y.score[i],cat,value):
-                # append doc num of 'bad' docs
-                elems.add(y.doc[i])
-        # if any 'bad' pargraph - remove whole document
-        badIndexes = []
+    for i in range(0,len(x)):
+        # if paragraph should be removed
+        if determine(y.cat[i],y.score[i],cat,value):
+            # append doc num of 'bad' docs
+            elems.add(y.doc[i])
+    # if any 'bad' pargraph - remove whole document
+    badIndexes = []
+    for i in range(0, len(x)):
+        if y.doc[i] in elems:
+            badIndexes.append(i)
+    
+    # optional param - filter documents by category
+    if requiredCat != None:
         for i in range(0, len(x)):
+            # skip documents that already marked 'remove'
             if y.doc[i] in elems:
-                badIndexes.append(i)
-
-    # or filter also by cat
-    else:
-        for i in range(0,len(x)):
-            # filter by aspect
+                continue
+            # mark 'remove' the other aspects in left documents
             if catDict[y.cat[i]] != requiredCat:
-                print catDict[y.cat[i]], requiredCat, i
-                elems.add(i)
-
-            badIndexes = list(elems)
-            # filter by cat=value  
+                badIndexes.append(i)
 
     return badIndexes
 
