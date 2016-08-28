@@ -560,10 +560,15 @@ class SvmClassifier(Classifier):
         
         clf = p.svmpipeline.fit(xTrain, yTrain.trueScore)
         predicted = clf.predict(xTest)
+        yTestFiltered = []
+        predictedNew = []
         for i in range(0, len(predicted)):
             if predicted[i] >= 5:
                 predicted[i] = True
             else:
                 predicted[i] = False
+            if yTest.trueScore[i] not in [5,6]:
+                yTestFiltered.append(yTest.score[i])
+                predictedNew.append(predicted[i])
 
-        self.printRes('SVM-score (Trained on rating: 1-10)', predicted, yTest.score)
+        self.printRes('SVM-score (Trained on rating: 1-10)', np.array(predictedNew), np.array(yTestFiltered))

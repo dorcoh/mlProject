@@ -27,15 +27,15 @@ if __name__ == '__main__':
 
     # classify
 
-    #svm = SvmClassifier(xTrain,yTrain,xTest,yTest)
-    #svm.classify(catList=testData.catCat)
+    svm = SvmClassifier(xTrain,yTrain,xTest,yTest)
+    svm.classify(catList=testData.catCat)
 
     #norma = NormaClassifier(xTrain,yTrain,xTest,yTest)
     #norma.classify(numDocsTrain,numDocsTest)
     
-    dirClf = Directed(xTrain,yTrain,xTest,yTest)
-    dirClf.classify(order=[0,1,2,3],verb=False)
+    #dirClf = Directed(xTrain,yTrain,xTest,yTest)
+    #dirClf.classify(order=[0,1,2,3],verb=False)
 
-    udirClf = Undirected(xTrain,yTrain,xTest,yTest)
-    udirClf.classify(trainOn='all',epsilon=0.01)
-    udirClf.classify(trainOn='aspect',epsilon=0.01)
+    #udirClf = Undirected(xTrain,yTrain,xTest,yTest)
+    #udirClf.classify(trainOn='all',epsilon=0.01)
+    #udirClf.classify(trainOn='aspect',epsilon=0.01)
