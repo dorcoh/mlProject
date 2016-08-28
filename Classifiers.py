@@ -358,7 +358,7 @@ class Undirected(Classifier):
         for doc in range(0, len(xTest) / numOfCat):
             docScores = self.predictSample(xTest, yTest, doc, clfList, allSet, trainOn, epsilon)
             for i in range(0, numOfCat):
-                if yTest.trueScore[currIndex] not in [5,6]:
+                if yTest.trueScore[currIndex] not in []:
                     yTestFiltered.append(yTest.score[currIndex])
                     predScores.append(docScores[i])
                 currIndex += 1
@@ -415,12 +415,13 @@ class Undirected(Classifier):
                         elif trainOn == 'aspect':
                             key = '-1,{0}:{1},T:{2}'.format(j,bin,cat)
                         # sum
+                        mult = probs[j][bin]
                         if bin == 0:
-                            binC = 1
-                        else:
-                            binC = 0
-                        P[cat] += (probs[j][binC])*clfDict[key].predict_proba(x[cat])
-                        divider += (probs[j][binC])
+                            mult = mult * 2.8
+                        #P[cat] += (probs[j][binC])*clfDict[key].predict_proba(x[cat])
+                        P[cat] += mult*clfDict[key].predict_proba(x[cat])
+                        #divider += (probs[j][binC])
+                        divider += mult
                 # normalize
                 P[cat] = P[cat] / divider
             
@@ -478,9 +479,9 @@ class Undirected(Classifier):
         self.genTuples(xTrain, yTrain, allSet, trainOn)
         clfList = []
         for tup in allSet:
-            x, y = balancing(tup[1][0],tup[1][1])
-            clf = p.svmpipeline.fit(x,y)
-            #clf = p.svmpipeline.fit(tup[1][0], tup[1][1].score)
+            #x, y = balancing(tup[1][0],tup[1][1])
+            #clf = p.svmpipeline.fit(x,y.score)
+            clf = p.svmpipeline.fit(tup[1][0], tup[1][1].score)
             clfList.append((tup[0], copy.deepcopy(clf)))
         return (dict(clfList), dict(allSet))
 
@@ -617,12 +618,15 @@ class SvmClassifier(Classifier):
         predicted = clf.predict(xTest)
         self.printRes('SVM-category', predicted, yTest.cat, catList)
         
-        clf = p.svmpipeline.fit(xTrain, yTrain.score)
+        x,y = balancing(xTrain,yTrain)
+        clf = p.svmpipeline.fit(x, y.score)
+        #clf = p.svmpipeline.fit(xTrain, yTrain.score)
+
         predicted = clf.predict(xTest)
         yTestFiltered = []
         predictedNew = []
         for i in range(0, len(predicted)):
-            if yTest.trueScore[i] not in [5,6]:
+            if yTest.trueScore[i] not in []:
                 yTestFiltered.append(yTest.score[i])
                 predictedNew.append(predicted[i])
         #self.printRes('SVM-score (Trained on score)', predicted, yTest.score)
@@ -637,7 +641,7 @@ class SvmClassifier(Classifier):
                 predicted[i] = True
             else:
                 predicted[i] = False
-            if yTest.trueScore[i] not in [5,6]:
+            if yTest.trueScore[i] not in []:
                 yTestFiltered.append(yTest.score[i])
                 predictedNew.append(predicted[i])
 

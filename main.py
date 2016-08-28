@@ -14,21 +14,33 @@ from Analyze import plotStats
 if __name__ == '__main__':
     
     # parse data
-    trainData = TextData('train-reviews.json',balance=True)
-    testData = TextData('test-reviews.json',balance=True)
+    trainData = TextData('train-reviews.json',balance=False)
+    testData = TextData('test-reviews.json',balance=False)
 
     xTrain, yTrain, numDocsTrain = trainData.x, trainData.y, trainData.docs
     xTest, yTest, numDocsTest = testData.x, testData.y, testData.docs
 
     print len(xTrain),len(yTrain.score)
+    """
+    pos,neg = 0,0
+    for i in range(len(xTrain)):
+        if yTrain.score[i] == False:
+            neg += 1
+        else:
+            pos += 1
+
+    print pos,neg
+    print "Pos:{0}, Neg:{1}".format(float(pos)/len(xTrain),float(neg)/len(xTrain))
+    """
+
     print len(xTest),len(yTest.score)
     # assumption checking for norma classifier
     # plotStats(xTrain,yTrain,numDocsTrain,xTest,yTest,numDocsTest)
 
     # classify
 
-    #svm = SvmClassifier(xTrain,yTrain,xTest,yTest)
-    #svm.classify(catList=testData.catCat)
+    svm = SvmClassifier(xTrain,yTrain,xTest,yTest)
+    svm.classify(catList=testData.catCat)
 
     #norma = NormaClassifier(xTrain,yTrain,xTest,yTest)
     #norma.classify(numDocsTrain,numDocsTest)
