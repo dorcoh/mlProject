@@ -1,5 +1,5 @@
 """
-    Helper module for implementation of classes, functions
+    Module for all of our needed classes and functions
 """
 import json
 from sklearn.datasets import fetch_20newsgroups
@@ -9,17 +9,11 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.linear_model import SGDClassifier
 from sklearn.grid_search import GridSearchCV
+from sklearn import metrics
 import numpy as np
 
-catDict = {
-    u'movie': 0,
-    u'extras': 1,
-    u'video': 2,
-    u'audio': 3
-}
-
 def multi_delete(list_, elems):
-    # delete multiple elements from a list
+    # delete multiple elements from a list in parallel
     indexes = sorted(elems, reverse=True)
     for index in indexes:
         del list_[index]
@@ -251,11 +245,17 @@ class Pipe:
                              ('clf', MultinomialNB()),
         ])
 
-def groupData(x,y,numOfDocs):
-    # group scores by document, e.g [6,5,4,9]
-
-    scores = [[0,0,0,0] for i in range(numOfDocs)]
-    for i in range(0, len(x)):
-        scores[y.doc[i]][catDict[y.cat[i]]] = y.score[i]
-
-    return scores
+def printRes(title,predicted,yTest,cats=None):
+    # print results
+    # accuracy, confusion, report
+    print "______________________"
+    print title
+    print "______________________"
+    print "Acc={0}".format(np.mean(predicted==yTest))
+    print "Confusion Matrix:"
+    print metrics.confusion_matrix(yTest,predicted)
+    if cats != None:
+        print "Classification Report:"
+        print(metrics.classification_report(yTest, predicted,
+                                            target_names=cats))
+    print

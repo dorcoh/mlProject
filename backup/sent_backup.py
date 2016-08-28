@@ -1,6 +1,3 @@
-"""
-    Helper module for implementation of classes, functions
-"""
 import json
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.feature_extraction.text import CountVectorizer
@@ -8,22 +5,12 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.linear_model import SGDClassifier
+from sklearn import metrics
 from sklearn.grid_search import GridSearchCV
 import numpy as np
-
-catDict = {
-    u'movie': 0,
-    u'extras': 1,
-    u'video': 2,
-    u'audio': 3
-}
-
-def multi_delete(list_, elems):
-    # delete multiple elements from a list
-    indexes = sorted(elems, reverse=True)
-    for index in indexes:
-        del list_[index]
-    return list_
+import matplotlib.pyplot as plt
+import math
+import sys
 
 class Feature:
     """
@@ -32,8 +19,7 @@ class Feature:
 
         attributes:
             - category
-            - score (True/False)
-            - true score (int 1-10)
+            - score
             - document
     """
     def __init__(self):
@@ -41,26 +27,6 @@ class Feature:
         self.score = []
         self.trueScore = []
         self.doc = []
-        self.index = 0
-    
-    # the two following functions are
-    # needed for making this object iterable
-    def __iter__(self):
-        return self
-
-    def next(self):
-        if self.index == len(self.cat)-1:
-            raise StopIteration
-        self.index = self.index + 1
-        return (self.cat[self.index], self.score[self.index],
-                self.trueScore[self.index], self.doc[self.index])
-
-    def removeItems(self, elements):
-        # removes items by a indexes
-        multi_delete(self.cat, elements)
-        multi_delete(self.score, elements)
-        multi_delete(self.trueScore, elements)
-        multi_delete(self.doc, elements)
 
 class TextData:
     """
@@ -84,9 +50,8 @@ class TextData:
                                 setence (description)
                                 from data
 
-        Attributes  X - paragraph
+        Attributes  X - paragraph,
                     Y - Feature (class repres' above)
-
     """
     def __init__(self,jsonFname,balance=False,withFirst=False):
         # parse data
@@ -178,6 +143,7 @@ class TextData:
             return False
         elif int(score) > 5:
             return True
+
     # !!!
     # Some bug here !!!
     # !!!
@@ -241,7 +207,7 @@ class Pipe:
         self.svmpipeline = Pipeline([
             ('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
-            ('clf', SGDClassifier(loss='modified_huber',penalty='l2',
+            ('clf', SGDClassifier(loss='hinge',penalty='l2',
                                   alpha=1e-3, n_iter=5,
                                   random_state=42)),
         ])
@@ -251,11 +217,208 @@ class Pipe:
                              ('clf', MultinomialNB()),
         ])
 
-def groupData(x,y,numOfDocs):
-    # group scores by document, e.g [6,5,4,9]
 
-    scores = [[0,0,0,0] for i in range(numOfDocs)]
+def printRes(title,predicted,yTest,cats=None):
+    # print results
+    # accuracy, confusion, report
+    print "______________________"
+    print title
+    print "______________________"
+    print "Acc={0}".format(np.mean(predicted==yTest))
+    print "Confusion Matrix:"
+    print metrics.confusion_matrix(yTest,predicted)
+    if cats != None:
+        print "Classification Report:"
+        print(metrics.classification_report(yTest, predicted,
+                                            target_names=cats))
+    print
+
+def printStats(x,y,docs):
+    """
+        Computes an histogram of variances
+        of pargaraph's score in the same document.
+        
+        then compute the probability from this histogram
+        for any variance
+
+        In:
+            x - paragraphs
+            y - Feature object
+            docs - number of documents in data
+    """
+
+    # computes the sum of score for each doc
+    sums = [0] * docs
+    numPar = [0] * docs
+
+    for i in range(0,len(x)):
+        sums[y.doc[i]] += y.trueScore[i]
+        numPar[y.doc[i]] += 1
+
+    # validity check
+    if len(numPar) != len(sums):
+        sys.exit("Error")
+
+    # compute average score for each doc
+    avg = [0] * docs
+    for j in range(0, len(sums)):
+        if numPar[j] != 4:
+            print j, numPar[j]
+            sys.exit("Error numPar[j] != 4")
+        avg[j] = float(sums[j]) / numPar[j]
+
+    # compute the variance for each doc
+    # compute for each paragraph the diff from avg of its document
+    var = [0] * docs
+    diff = [0] * len(x)
     for i in range(0, len(x)):
-        scores[y.doc[i]][catDict[y.cat[i]]] = y.score[i]
+        var[y.doc[i]] += (y.trueScore[i]-avg[y.doc[i]])**2
+        diff[i] = y.trueScore[i] - avg[y.doc[i]]
 
-    return scores
+    for i in range(0, len(var)):
+        var[i] = float(var[i]) / (numPar[i]-1)
+
+    histVar, binsVar = np.histogram(var, bins=40, range=(0,20), density=True)
+    histDiff, binsDiff = np.histogram(diff, bins=40, range=(-10.0,10.0), density=True)
+
+    return histVar,binsVar,histDiff,binsDiff
+    """
+    zero = 0
+    neg = 0
+    pos = 0
+    step = 0.5
+    histArt = [0] * int(math.ceil(20/step))
+    for j in range(0, len(x)):
+        # diff between the true score and the average score
+        # in current paragraph's document
+        diff = y.trueScore[j] - sums[y.doc[j]]
+        if diff > 0:
+            pos += 1
+        elif diff < 0:
+            neg += 1
+        else:
+            zero += 1
+        histArt[int(math.floor(diff+len(histArt)/2))] += 1
+
+    # [-10, -9.5, ... , 9.5,10]
+    bin_edges = []
+    bin = -10
+    for j in range(0, len(histArt)+1):
+        bin_edges.append(bin+j*step)
+
+    print bin_edges
+
+    print "Negative: {0} ({1})\nZero: {2} ({3})\nPositive: {4} ({5})".format(
+                                                    float(neg)/len(xTrain),neg,
+                                                    float(zero)/len(xTrain),zero,
+                                                    float(pos)/len(xTrain),pos)
+
+    for i in range(0,len(histArt)):
+        histArt[i] = float(histArt[i])/len(x)
+
+
+    #hist, bin_edges = np.histogram(histArt, range=(-10.0,10.0), bins=40)
+    #print hist, '\n', bin_edges
+
+    plt.bar(bin_edges[:-1], histArt, width=step)
+    plt.xlim(min(bin_edges), max(bin_edges))
+    plt.show()    
+    """
+
+def plotStats(xTrain,yTrain,docsTrain,xTest,yTest,docsTest):
+
+    f, axarr = plt.subplots(2)
+
+    # train data
+    histVar, binsVar, histDiff, binsDiff = printStats(xTrain,yTrain,docsTrain)
+
+    axarr[0].bar(binsVar[:-1], histVar, width=0.5)
+    axarr[0].set_title("Training - Variance")
+    axarr[0].set_xlabel("Score's variance")
+    axarr[0].set_ylabel("Probability")
+    axarr[0].set_ylim([0, 0.5])
+    axarr[1].bar(binsDiff[:-1], histDiff, width=0.5)
+    axarr[1].set_title("Training - Difference")
+    axarr[1].set_xlabel("Score's diff")
+    axarr[1].set_ylabel("Probability")
+    axarr[1].set_ylim([0, 0.5])
+    
+    """
+    # test data
+    histVar, binsVar, histDiff, binsDiff = printStats(xTest,yTest,docsTest)
+
+    axarr[1, 0].bar(binsVar[:-1], histVar, width=0.5)
+    axarr[1 ,0].set_title("Test - Variance")
+    axarr[1, 0].set_xlabel("Score's variance")
+    axarr[1, 0].set_ylabel("Probability")
+    axarr[1, 0].set_ylim([0, 0.5])
+    axarr[1, 1].bar(binsDiff[:-1], histDiff, width=0.5)
+    axarr[1 ,1].set_title("Test - Difference")
+    axarr[1, 1].set_xlabel("Score's diff")
+    axarr[1, 1].set_ylabel("Probability")
+    axarr[1, 1].set_ylim([0, 0.5])
+    """
+    
+    # plot
+    plt.setp([a.get_xticklabels() for a in axarr[0:]], visible=False)
+    #plt.setp([a.get_yticklabels() for a in axarr[:, 1]], visible=False)
+
+    plt.suptitle("Assumption checking: Paragraph scores are dependent on avg score (of it's document)")
+    plt.show()
+
+    """
+    plt.bar(bin_edges[:-1], histDiff, width=0.5)
+    plt.xlim(min(bin_edges), max(bin_edges))
+    plt.title("Probabilites of score variance for each document")
+    plt.xlabel("Score's variance")
+    plt.ylabel("Probability")
+    plt.show()
+    """
+
+if __name__ == '__main__':
+    trainData = TextData('train-reviews.json',balance=False)
+    testData = TextData('test-reviews.json',balance=False)
+
+    xTrain, yTrain, docsTrain = trainData.x, trainData.y, trainData.docs
+    xTest, yTest, docsTest = testData.x, testData.y, testData.docs
+
+    #printStats(xTrain,yTrain,docsTrain)
+    #printStats(xTest,yTest,docsTest)
+    #plotStats(xTrain,yTrain,docsTrain,xTest,yTest,docsTest)
+
+
+    scoresTrain = [0] * len(docsTrain)
+    for i in range(0, len(xTrain)):
+        scoreTrain[i].append()
+
+    scoresTest = [0] * len(docsTest)
+
+    for i in range(0, len(xTest)):
+        lengthDiff = [0] * len(docsTrain)
+        for j in range(0, len(xTrain)):
+
+
+
+    # tfidf transformer
+    """
+    count_vect = CountVectorizer()
+    xTrainCounts = count_vect.fit_transform(xTrain)
+    print xTrainCounts.shape
+
+
+    tf_transformer = TfidfTransformer(use_idf=False).fit(xTrainCounts)
+    xTrainTf = tf_transformer.transform(xTrainCounts)
+    """
+
+    # predict
+    """
+    p = Pipe()
+
+    clf = p.svmpipeline.fit(xTrain, yTrain.cat)
+    predicted = clf.predict(xTest)
+    printRes("SVM-category",predicted,yTest.cat,testData.catCat)
+
+    clf = p.svmpipeline.fit(xTrain, yTrain.score)
+    predicted = clf.predict(xTest)
+    printRes("SVM-score",predicted,yTest.score)
+    """

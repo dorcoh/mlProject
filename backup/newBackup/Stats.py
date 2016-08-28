@@ -1,10 +1,3 @@
-"""
-    This module was used for assumption checking
-    We wanted to check how the scores are dependent on the avg
-    in order to implement the norma classifier
-    (Described in Classifiers module)
-"""
-
 import numpy as np
 import matplotlib.pyplot as plt
 
