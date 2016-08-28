@@ -348,9 +348,11 @@ class Undirected(Classifier):
         P = [0 for i in range(self.numOfCat)]
 
         # iterate over equation
+        binC = 0
         while (1):
             for cat in range(self.numOfCat):
                 P[cat] = 0
+                divider = 0
                 for j in perms[cat]:
                     for bin in [0,1]:
                         if trainOn == 'all':
@@ -358,9 +360,14 @@ class Undirected(Classifier):
                         elif trainOn == 'aspect':
                             key = '-1,{0}:{1},T:{2}'.format(j,bin,cat)
                         # sum
-                        P[cat] += probs[j][bin]*clfDict[key].predict_proba(x[cat])
+                        if bin == 0:
+                            binC = 1
+                        else:
+                            binC = 0
+                        P[cat] += probs[j][binC]*clfDict[key].predict_proba(x[cat])
+                        divider += probs[j][binC]
                 # normalize
-                P[cat] = P[cat] / 3
+                P[cat] = P[cat] / divider
             
             # compute norma
             a = [probs[i][0] for i in range(self.numOfCat)]
@@ -556,7 +563,14 @@ class SvmClassifier(Classifier):
         
         clf = p.svmpipeline.fit(xTrain, yTrain.score)
         predicted = clf.predict(xTest)
-        self.printRes('SVM-score (Trained on score)', predicted, yTest.score)
+        yTestFiltered = []
+        predictedNew = []
+        for i in range(0, len(predicted)):
+            if yTest.trueScore[i] not in [5,6]:
+                yTestFiltered.append(yTest.score[i])
+                predictedNew.append(predicted[i])
+        #self.printRes('SVM-score (Trained on score)', predicted, yTest.score)
+        self.printRes('SVM-score (Trained on score)', np.array(predictedNew), np.array(yTestFiltered))
         
         clf = p.svmpipeline.fit(xTrain, yTrain.trueScore)
         predicted = clf.predict(xTest)
@@ -571,4 +585,5 @@ class SvmClassifier(Classifier):
                 yTestFiltered.append(yTest.score[i])
                 predictedNew.append(predicted[i])
 
+        #self.printRes('SVM-score (Trained on rating: 1-10)', predicted, yTest.score)
         self.printRes('SVM-score (Trained on rating: 1-10)', np.array(predictedNew), np.array(yTestFiltered))

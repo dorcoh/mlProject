@@ -118,6 +118,7 @@ class TextData:
         X = []
         Y = Feature()
         # iterate over all docs
+
         for i in range(0, len(textObj)):
             # iterate over all categories
             for c in cats:
