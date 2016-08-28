@@ -182,7 +182,8 @@ class TextData:
     # !!!
     # Some bug here !!!
     # !!!
-    def balancing(self,x,y):
+    @staticmethod
+    def balancing(x,y):
         # balance the dataset
         # by duplicating the smaller group (score)
         xres=[]
@@ -242,7 +243,7 @@ class Pipe:
         self.svmpipeline = Pipeline([
             ('vect', CountVectorizer()),
             ('tfidf', TfidfTransformer()),
-            ('clf', SGDClassifier(loss='modified_huber',penalty='l2',
+            ('clf', SGDClassifier(loss='log',penalty='l2',
                                   alpha=1e-3, n_iter=5,
                                   random_state=42)),
         ])

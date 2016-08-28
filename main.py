@@ -14,8 +14,8 @@ from Analyze import plotStats
 if __name__ == '__main__':
     
     # parse data
-    trainData = TextData('train-reviews.json',balance=False)
-    testData = TextData('test-reviews.json',balance=False)
+    trainData = TextData('train-reviews.json',balance=True)
+    testData = TextData('test-reviews.json',balance=True)
 
     xTrain, yTrain, numDocsTrain = trainData.x, trainData.y, trainData.docs
     xTest, yTest, numDocsTest = testData.x, testData.y, testData.docs
@@ -27,14 +27,14 @@ if __name__ == '__main__':
 
     # classify
 
-    svm = SvmClassifier(xTrain,yTrain,xTest,yTest)
-    svm.classify(catList=testData.catCat)
+    #svm = SvmClassifier(xTrain,yTrain,xTest,yTest)
+    #svm.classify(catList=testData.catCat)
 
-    norma = NormaClassifier(xTrain,yTrain,xTest,yTest)
-    norma.classify(numDocsTrain,numDocsTest)
+    #norma = NormaClassifier(xTrain,yTrain,xTest,yTest)
+    #norma.classify(numDocsTrain,numDocsTest)
     
-    dirClf = Directed(xTrain,yTrain,xTest,yTest)
-    dirClf.classify(order=[0,1,2,3],verb=False)
+    #dirClf = Directed(xTrain,yTrain,xTest,yTest)
+    #dirClf.classify(order=[0,1,2,3],verb=False)
 
     udirClf = Undirected(xTrain,yTrain,xTest,yTest)
     udirClf.classify(trainOn='all',epsilon=0.01)

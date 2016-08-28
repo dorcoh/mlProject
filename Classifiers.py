@@ -10,6 +10,61 @@ from DataStructures import Pipe
 from DataStructures import multi_delete
 from DataStructures import catDict
 
+def balancing(x,y):
+    # balance the dataset
+    # by duplicating the smaller group (score)
+    xres=[]
+    yres=Feature()
+    total = len(x)
+    fCount, tCount = 0, 0
+    for i in range(0,total):
+        if y.score[i] == False:
+            fCount += 1
+    tCount = total-fCount
+
+    if tCount < fCount:
+        smaller = True
+    elif tCount > fCount:
+        smaller = False
+    else:
+        return x,y
+    ftratio = float(fCount)/tCount
+    # Positive is smaller
+    length = len(x)
+    if smaller:
+        for i in range(0,length):
+            if y.score[i] == True:
+                for s in range(0,int(ftratio)):
+                    xres.append(x[i])
+                    yres.cat.append(y.cat[i])
+                    yres.score.append(y.score[i])
+                    yres.doc.append(y.doc[i])
+                    yres.trueScore.append(y.trueScore[i])
+            else:
+                xres.append(x[i])
+                yres.cat.append(y.cat[i])
+                yres.score.append(y.score[i])
+                yres.doc.append(y.doc[i])
+                yres.trueScore.append(y.trueScore[i])
+    # Negative  
+    else:
+        for i in range(0,length):
+            if y.score[i] == False:
+                for s in range(0,int(1/ftratio)):
+                    xres.append(x[i])
+                    yres.cat.append(y.cat[i])
+                    yres.score.append(y.score[i])
+                    yres.doc.append(y.doc[i])
+                    yres.trueScore.append(y.trueScore[i])
+            else:
+                xres.append(x[i])
+                yres.cat.append(y.cat[i])
+                yres.score.append(y.score[i])
+                yres.doc.append(y.doc[i])
+                yres.trueScore.append(y.trueScore[i])
+
+    return xres,yres
+
 class Classifier:
     """
         A base class for our custom classifiers
@@ -364,8 +419,8 @@ class Undirected(Classifier):
                             binC = 1
                         else:
                             binC = 0
-                        P[cat] += probs[j][binC]*clfDict[key].predict_proba(x[cat])
-                        divider += probs[j][binC]
+                        P[cat] += (probs[j][binC])*clfDict[key].predict_proba(x[cat])
+                        divider += (probs[j][binC])
                 # normalize
                 P[cat] = P[cat] / divider
             
@@ -423,9 +478,10 @@ class Undirected(Classifier):
         self.genTuples(xTrain, yTrain, allSet, trainOn)
         clfList = []
         for tup in allSet:
-            clf = p.svmpipeline.fit(tup[1][0], tup[1][1].score)
+            x, y = balancing(tup[1][0],tup[1][1])
+            clf = p.svmpipeline.fit(x,y)
+            #clf = p.svmpipeline.fit(tup[1][0], tup[1][1].score)
             clfList.append((tup[0], copy.deepcopy(clf)))
-
         return (dict(clfList), dict(allSet))
 
     def genTuples(self, xTrain, yTrain, allSet, trainOn):
