@@ -134,17 +134,21 @@ class Directed(Classifier):
             missDict = None
         clfList, allSet = self.generateClassifiers(xTrain, yTrain, xTest, yTest, order)
         predScores = []
+        yTestFiltered = []
+        currIndex = 0
         for docId in range(0, len(xTest) / self.numOfCat):
             docScores = self.predictSample(xTest, yTest, docId, clfList, allSet, missDict, order)
             for i in range(0, 4):
-                predScores.append(docScores[i])
-
+                if yTest.trueScore[currIndex] not in [5,6]:
+                    yTestFiltered.append(yTest.score[currIndex])
+                    predScores.append(docScores[i])
+                currIndex += 1
         mainKey = '-1'
         clf = dict(clfList)[mainKey]
         baselinePred = clf.predict(xTest)
         baselinePred = np.array(baselinePred)
         predScores = np.array(predScores)
-        acc = self.printRes('One-direction-dependency', predScores, yTest.score)
+        acc = self.printRes('One-direction-dependency', predScores, yTestFiltered)
         if verb:
             print 'Total misses:'
             for key in missDict:
@@ -235,6 +239,8 @@ class Directed(Classifier):
 
         clfList = []
         for tup in allSet:
+            #print len(tup[1][0]),len(tup[1][1].score)
+            #print tup[1][1].score
             clf = p.svmpipeline.fit(tup[1][0], tup[1][1].score)
             clfList.append((tup[0], copy.deepcopy(clf)))
 
@@ -292,16 +298,21 @@ class Undirected(Classifier):
         numOfCat = self.numOfCat
         clfList, allSet = self.generateClassifiers(xTrain, yTrain, xTest, yTest, trainOn)
         predScores = []
+        yTestFiltered = []
+        currIndex = 0
         for doc in range(0, len(xTest) / numOfCat):
             docScores = self.predictSample(xTest, yTest, doc, clfList, allSet, trainOn, epsilon)
             for i in range(0, numOfCat):
-                predScores.append(docScores[i])
+                if yTest.trueScore[currIndex] not in [5,6]:
+                    yTestFiltered.append(yTest.score[currIndex])
+                    predScores.append(docScores[i])
+                currIndex += 1
 
         mainKey = '-1'
         clf = dict(clfList)[mainKey]
         titles = {'all': 'Pairwise-trained by all aspects',
          'aspect': 'Pairwise-trained by aspect'}
-        self.printRes(titles[trainOn], np.array(predScores), yTest.score)
+        self.printRes(titles[trainOn], np.array(predScores), yTestFiltered)
 
     def predictSample(self,xTest,yTest,docId,clfDict,setsDict,trainOn,epsilon):
         """

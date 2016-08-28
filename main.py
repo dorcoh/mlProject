@@ -20,16 +20,18 @@ if __name__ == '__main__':
     xTrain, yTrain, numDocsTrain = trainData.x, trainData.y, trainData.docs
     xTest, yTest, numDocsTest = testData.x, testData.y, testData.docs
 
+    print len(xTrain),len(yTrain.score)
+    print len(xTest),len(yTest.score)
     # assumption checking for norma classifier
     # plotStats(xTrain,yTrain,numDocsTrain,xTest,yTest,numDocsTest)
 
     # classify
 
-    svm = SvmClassifier(xTrain,yTrain,xTest,yTest)
-    svm.classify(catList=testData.catCat)
+    #svm = SvmClassifier(xTrain,yTrain,xTest,yTest)
+    #svm.classify(catList=testData.catCat)
 
-    norma = NormaClassifier(xTrain,yTrain,xTest,yTest)
-    norma.classify(numDocsTrain,numDocsTest)
+    #norma = NormaClassifier(xTrain,yTrain,xTest,yTest)
+    #norma.classify(numDocsTrain,numDocsTest)
     
     dirClf = Directed(xTrain,yTrain,xTest,yTest)
     dirClf.classify(order=[0,1,2,3],verb=False)
