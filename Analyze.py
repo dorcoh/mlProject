@@ -42,6 +42,7 @@ def printStats(x,y,docs):
             sys.exit("Error numPar[j] != 4")
         avg[j] = float(sums[j]) / numPar[j]
 
+
     # compute the variance for each doc
     # compute for each paragraph the diff from avg of its document
     var = [0] * docs
@@ -57,6 +58,23 @@ def printStats(x,y,docs):
     histDiff, binsDiff = np.histogram(diff, bins=40, range=(-10.0,10.0), density=True)
 
     return histVar,binsVar,histDiff,binsDiff
+
+def outVar(x,y):
+    # computes the avg of all scores
+    sumScore = 0
+    for i in range(0,len(x)):
+        sumScore += y.trueScore[i]
+    
+    avgScore = sumScore / len(x)
+
+    # compute variance
+    var = 0
+    for i in range(0, len(x)):
+        var += (y.trueScore[i]-avgScore)**2
+
+    var = float(var)/(len(x)-1)
+
+    return var
 
 def plotStats(xTrain,yTrain,docsTrain,xTest,yTest,docsTest):
     # plot stats

@@ -100,9 +100,6 @@ class TextData:
         # categories
         self.catScore = [False,True]
         self.catCat = self.getCats(self.data)
-        # balance x,y
-        if balance:
-            self.x, self.y = self.balancing(self.x, self.y) 
 
     def loadJson(self,fname):
         # load json file from current path
@@ -179,64 +176,6 @@ class TextData:
             return False
         elif int(score) > 5:
             return True
-    # !!!
-    # Some bug here !!!
-    # !!!
-    @staticmethod
-    def balancing(x,y):
-        # balance the dataset
-        # by duplicating the smaller group (score)
-        xres=[]
-        yres=Feature()
-        total = len(x)
-        fCount, tCount = 0, 0
-        for i in range(0,total):
-            if y.score[i] == False:
-                fCount += 1
-        tCount = total-fCount
-
-        if tCount < fCount:
-            smaller = True
-        elif tCount > fCount:
-            smaller = False
-        else:
-            return x,y
-        ftratio = float(fCount)/tCount
-        # Positive is smaller
-        length = len(x)
-        if smaller:
-            for i in range(0,length):
-                if y.score[i] == True:
-                    for s in range(0,int(ftratio)):
-                        xres.append(x[i])
-                        yres.cat.append(y.cat[i])
-                        yres.score.append(y.score[i])
-                        yres.doc.append(y.doc[i])
-                        yres.trueScore.append(y.trueScore[i])
-                else:
-                    xres.append(x[i])
-                    yres.cat.append(y.cat[i])
-                    yres.score.append(y.score[i])
-                    yres.doc.append(y.doc[i])
-                    yres.trueScore.append(y.trueScore[i])
-        # Negative  
-        else:
-            for i in range(0,length):
-                if y.score[i] == False:
-                    for s in range(0,int(1/ftratio)):
-                        xres.append(x[i])
-                        yres.cat.append(y.cat[i])
-                        yres.score.append(y.score[i])
-                        yres.doc.append(y.doc[i])
-                        yres.trueScore.append(y.trueScore[i])
-                else:
-                    xres.append(x[i])
-                    yres.cat.append(y.cat[i])
-                    yres.score.append(y.score[i])
-                    yres.doc.append(y.doc[i])
-                    yres.trueScore.append(y.trueScore[i])
-
-        return xres,yres
 
 class Pipe:
     def __init__(self):
@@ -261,3 +200,58 @@ def groupData(x,y,numOfDocs):
         scores[y.doc[i]][catDict[y.cat[i]]] = y.score[i]
 
     return scores
+
+def balancing(x,y):
+    # balance the dataset
+    # by duplicating the smaller group (score)
+    xres=[]
+    yres=Feature()
+    total = len(x)
+    fCount, tCount = 0, 0
+    for i in range(0,total):
+        if y.score[i] == False:
+            fCount += 1
+    tCount = total-fCount
+
+    if tCount < fCount:
+        smaller = True
+    elif tCount > fCount:
+        smaller = False
+    else:
+        return x,y
+    ftratio = float(fCount)/tCount
+    # Positive is smaller
+    length = len(x)
+    if smaller:
+        for i in range(0,length):
+            if y.score[i] == True:
+                for s in range(0,int(ftratio)):
+                    xres.append(x[i])
+                    yres.cat.append(y.cat[i])
+                    yres.score.append(y.score[i])
+                    yres.doc.append(y.doc[i])
+                    yres.trueScore.append(y.trueScore[i])
+            else:
+                xres.append(x[i])
+                yres.cat.append(y.cat[i])
+                yres.score.append(y.score[i])
+                yres.doc.append(y.doc[i])
+                yres.trueScore.append(y.trueScore[i])
+    # Negative  
+    else:
+        for i in range(0,length):
+            if y.score[i] == False:
+                for s in range(0,int(1/ftratio)):
+                    xres.append(x[i])
+                    yres.cat.append(y.cat[i])
+                    yres.score.append(y.score[i])
+                    yres.doc.append(y.doc[i])
+                    yres.trueScore.append(y.trueScore[i])
+            else:
+                xres.append(x[i])
+                yres.cat.append(y.cat[i])
+                yres.score.append(y.score[i])
+                yres.doc.append(y.doc[i])
+                yres.trueScore.append(y.trueScore[i])
+
+    return xres,yres

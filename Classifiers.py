@@ -9,73 +9,22 @@ from DataStructures import TextData
 from DataStructures import Pipe
 from DataStructures import multi_delete
 from DataStructures import catDict
-
-def balancing(x,y):
-    # balance the dataset
-    # by duplicating the smaller group (score)
-    xres=[]
-    yres=Feature()
-    total = len(x)
-    fCount, tCount = 0, 0
-    for i in range(0,total):
-        if y.score[i] == False:
-            fCount += 1
-    tCount = total-fCount
-
-    if tCount < fCount:
-        smaller = True
-    elif tCount > fCount:
-        smaller = False
-    else:
-        return x,y
-    ftratio = float(fCount)/tCount
-    # Positive is smaller
-    length = len(x)
-    if smaller:
-        for i in range(0,length):
-            if y.score[i] == True:
-                for s in range(0,int(ftratio)):
-                    xres.append(x[i])
-                    yres.cat.append(y.cat[i])
-                    yres.score.append(y.score[i])
-                    yres.doc.append(y.doc[i])
-                    yres.trueScore.append(y.trueScore[i])
-            else:
-                xres.append(x[i])
-                yres.cat.append(y.cat[i])
-                yres.score.append(y.score[i])
-                yres.doc.append(y.doc[i])
-                yres.trueScore.append(y.trueScore[i])
-    # Negative  
-    else:
-        for i in range(0,length):
-            if y.score[i] == False:
-                for s in range(0,int(1/ftratio)):
-                    xres.append(x[i])
-                    yres.cat.append(y.cat[i])
-                    yres.score.append(y.score[i])
-                    yres.doc.append(y.doc[i])
-                    yres.trueScore.append(y.trueScore[i])
-            else:
-                xres.append(x[i])
-                yres.cat.append(y.cat[i])
-                yres.score.append(y.score[i])
-                yres.doc.append(y.doc[i])
-                yres.trueScore.append(y.trueScore[i])
-
-    return xres,yres
+from DataStructures import balancing
 
 class Classifier:
     """
         A base class for our custom classifiers
     """
 
-    def __init__(self, xTrain, yTrain, xTest, yTest):
+    def __init__(self, xTrain, yTrain, xTest, yTest,
+                 exclude=[], balance=False):
         self.xTrain = xTrain
         self.yTrain = yTrain
         self.xTest = xTest
         self.yTest = yTest
         self.numOfCat = 4
+        self.excludeScores = exclude
+        self.balancing = balance
 
     def filterData(self, x, y, cat, value, requiredCat = None):
         """
@@ -194,7 +143,7 @@ class Directed(Classifier):
         for docId in range(0, len(xTest) / self.numOfCat):
             docScores = self.predictSample(xTest, yTest, docId, clfList, allSet, missDict, order)
             for i in range(0, 4):
-                if yTest.trueScore[currIndex] not in [5,6]:
+                if yTest.trueScore[currIndex] not in self.excludeScores:
                     yTestFiltered.append(yTest.score[currIndex])
                     predScores.append(docScores[i])
                 currIndex += 1
@@ -294,9 +243,13 @@ class Directed(Classifier):
 
         clfList = []
         for tup in allSet:
-            #print len(tup[1][0]),len(tup[1][1].score)
+            if self.balancing:
+                x,y = balancing(tup[1][0],tup[1][1])
+            else:
+                x,y = tup[1][0],tup[1][1]
+            clf = p.svmpipeline.fit(x,y.score)
             #print tup[1][1].score
-            clf = p.svmpipeline.fit(tup[1][0], tup[1][1].score)
+            #clf = p.svmpipeline.fit(tup[1][0], tup[1][1].score)
             clfList.append((tup[0], copy.deepcopy(clf)))
 
         return (dict(clfList), dict(allSet))
@@ -358,7 +311,7 @@ class Undirected(Classifier):
         for doc in range(0, len(xTest) / numOfCat):
             docScores = self.predictSample(xTest, yTest, doc, clfList, allSet, trainOn, epsilon)
             for i in range(0, numOfCat):
-                if yTest.trueScore[currIndex] not in []:
+                if yTest.trueScore[currIndex] not in self.excludeScores:
                     yTestFiltered.append(yTest.score[currIndex])
                     predScores.append(docScores[i])
                 currIndex += 1
@@ -417,7 +370,7 @@ class Undirected(Classifier):
                         # sum
                         mult = probs[j][bin]
                         if bin == 0:
-                            mult = mult * 2.8
+                            mult = mult * 1
                         #P[cat] += (probs[j][binC])*clfDict[key].predict_proba(x[cat])
                         P[cat] += mult*clfDict[key].predict_proba(x[cat])
                         #divider += (probs[j][binC])
@@ -479,9 +432,12 @@ class Undirected(Classifier):
         self.genTuples(xTrain, yTrain, allSet, trainOn)
         clfList = []
         for tup in allSet:
-            #x, y = balancing(tup[1][0],tup[1][1])
-            #clf = p.svmpipeline.fit(x,y.score)
-            clf = p.svmpipeline.fit(tup[1][0], tup[1][1].score)
+            if self.balancing:
+                x,y = balancing(tup[1][0],tup[1][1])
+            else:
+                x,y = tup[1][0],tup[1][1]
+            clf = p.svmpipeline.fit(x,y.score)
+            #clf = p.svmpipeline.fit(tup[1][0], tup[1][1].score)
             clfList.append((tup[0], copy.deepcopy(clf)))
         return (dict(clfList), dict(allSet))
 
@@ -617,19 +573,20 @@ class SvmClassifier(Classifier):
         clf = p.svmpipeline.fit(xTrain, yTrain.cat)
         predicted = clf.predict(xTest)
         self.printRes('SVM-category', predicted, yTest.cat, catList)
-        
-        x,y = balancing(xTrain,yTrain)
+        if self.balancing:
+            x,y = balancing(xTrain,yTrain)
+        else:
+            x,y = xTrain, yTrain
         clf = p.svmpipeline.fit(x, y.score)
-        #clf = p.svmpipeline.fit(xTrain, yTrain.score)
 
         predicted = clf.predict(xTest)
         yTestFiltered = []
         predictedNew = []
         for i in range(0, len(predicted)):
-            if yTest.trueScore[i] not in []:
+            if yTest.trueScore[i] not in self.excludeScores:
                 yTestFiltered.append(yTest.score[i])
                 predictedNew.append(predicted[i])
-        #self.printRes('SVM-score (Trained on score)', predicted, yTest.score)
+
         self.printRes('SVM-score (Trained on score)', np.array(predictedNew), np.array(yTestFiltered))
         
         clf = p.svmpipeline.fit(xTrain, yTrain.trueScore)
@@ -641,9 +598,8 @@ class SvmClassifier(Classifier):
                 predicted[i] = True
             else:
                 predicted[i] = False
-            if yTest.trueScore[i] not in []:
+            if yTest.trueScore[i] not in self.excludeScores:
                 yTestFiltered.append(yTest.score[i])
                 predictedNew.append(predicted[i])
 
-        #self.printRes('SVM-score (Trained on rating: 1-10)', predicted, yTest.score)
         self.printRes('SVM-score (Trained on rating: 1-10)', np.array(predictedNew), np.array(yTestFiltered))
