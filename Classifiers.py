@@ -18,12 +18,16 @@ class Classifier:
 
     def __init__(self, xTrain, yTrain, xTest, yTest,
                  exclude=[], balance=False):
+        # sets
         self.xTrain = xTrain
         self.yTrain = yTrain
         self.xTest = xTest
         self.yTest = yTest
+        # number of aspects
         self.numOfCat = 4
+        # list of excluded scores
         self.excludeScores = exclude
+        # a flag for balancing
         self.balancing = balance
 
     def filterData(self, x, y, cat, value, requiredCat = None):
@@ -47,6 +51,7 @@ class Classifier:
             if y.doc[i] in elems:
                 badIndexes.append(i)
 
+        # optional: specified category only (e.g: A)
         if requiredCat != None:
             for i in range(0, len(x)):
                 if y.doc[i] in elems:
@@ -84,7 +89,9 @@ class Classifier:
         """
         x = []
         y = Feature()
+        # find index
         i = docId * self.numOfCat + aspect
+        # collect data
         x.append(xTest[i])
         y.cat.append(yTest.cat[i])
         y.score.append(yTest.score[i])
@@ -132,27 +139,30 @@ class Directed(Classifier):
         """
         xTrain, yTrain = self.xTrain, self.yTrain
         xTest, yTest = self.xTest, self.yTest
+        # optional: verbosity
         if verb:
-            missDict = {0: 0,1:0,2:0,3:0}
+            missDict = {0:0,1:0,2:0,3:0}
         else:
             missDict = None
+        # generate needed classifiers
         clfList, allSet = self.generateClassifiers(xTrain, yTrain, xTest, yTest, order)
         predScores = []
         yTestFiltered = []
         currIndex = 0
+        # predict labels for each document
         for docId in range(0, len(xTest) / self.numOfCat):
             docScores = self.predictSample(xTest, yTest, docId, clfList, allSet, missDict, order)
             for i in range(0, 4):
+                # optional: exclude scores
                 if yTest.trueScore[currIndex] not in self.excludeScores:
                     yTestFiltered.append(yTest.score[currIndex])
                     predScores.append(docScores[i])
                 currIndex += 1
-        mainKey = '-1'
-        clf = dict(clfList)[mainKey]
-        baselinePred = clf.predict(xTest)
-        baselinePred = np.array(baselinePred)
+
+        # print results
         predScores = np.array(predScores)
         acc = self.printRes('One-direction-dependency', predScores, yTestFiltered)
+        # optional: verbosity
         if verb:
             print 'Total misses:'
             for key in missDict:
@@ -170,14 +180,19 @@ class Directed(Classifier):
                 predicted score, e.g: [True,True,False,False]
         """
         x = []
+        # gets samples ordered in groups
         for i in order:
             data, labels = self.chooseSample(xTest, yTest, docId, i)
             x.append(data)
 
+        # get main classifier
         mainKey = '-1'
         clf = clfDict[mainKey]
+        # predict probability
         probsA = clf.predict_proba(x[0])[0]
         probList = list()
+        # compute all 16 combinations for the target equation
+        # by iterating on 4 nested loops
         for a in xrange(0, 2):
             aKey = '{0}:{1}'.format(order[0], a)
             clfKey = mainKey + str(',') + aKey
@@ -196,16 +211,21 @@ class Directed(Classifier):
                     for k in xrange(0, 2):
                         dKey = '{0}:{1}'.format(order[3], k)
                         sequenceKey = mainKey + str(',') + aKey + str(',') + bKey + str(',') + cKey + str(',') + dKey
+                        # append probability
                         probList.append((sequenceKey, probsA[a] * probsB[i] * probsC[j] * probsD[k]))
 
         probDict = dict(probList)
+        # get max key
         maxKey = max(probDict.iterkeys(), key=lambda key: probDict[key])
+        # save result
         result = [None for i in range(self.numOfCat)]
         for i in range(self.numOfCat):
             result[order[i]] = bool(int(maxKey.split(',')[i + 1][2]))
 
+        # optional: verbosity
         if missDict:
             self.showStats(yTest, probDict, result, missDict, docId, maxKey)
+
         return result
 
     def generateClassifiers(self, xTrain, yTrain, xTest, yTest, order):
@@ -222,15 +242,20 @@ class Directed(Classifier):
                     clfList - a dictionary of classifiers
                     allSet - a corresponding dictionary of training sets
         """
+        # tfidf pipeline
         p = Pipe()
+        # a list of tuples for the different training sets
         currSet = [('-1', (xTrain, yTrain))]
         allSet = copy.deepcopy(currSet)
         translator = [False, True]
+        
+        # generate training sets (by order parameter)
         for i in order[:-1]:
             newCurrList = []
             for elem in currSet:
                 for j in [0, 1]:
                     key = str(elem[0]) + ',' + str(i) + ':' + str(j)
+                    # create new training set for classifier
                     badIndexes = self.filterData(elem[1][0], elem[1][1], i, translator[j])
                     newX = copy.deepcopy(elem[1][0])
                     newY = copy.deepcopy(elem[1][1])
@@ -242,19 +267,24 @@ class Directed(Classifier):
             currSet = newCurrList
 
         clfList = []
+        # iterate over all training sets
+        # and generate classifiers
         for tup in allSet:
+            # optional: balancing
             if self.balancing:
                 x,y = balancing(tup[1][0],tup[1][1])
             else:
                 x,y = tup[1][0],tup[1][1]
+            # fit and append to list
             clf = p.svmpipeline.fit(x,y.score)
-            #print tup[1][1].score
-            #clf = p.svmpipeline.fit(tup[1][0], tup[1][1].score)
             clfList.append((tup[0], copy.deepcopy(clf)))
 
         return (dict(clfList), dict(allSet))
 
     def showStats(self, yTest, probDict, result, missDict, docId, maxKey):
+        """
+            An optional function for printing more detailed results
+        """
         trueLabel = []
         startIdx = docId * self.numOfCat
         for i in range(startIdx, startIdx + self.numOfCat):
@@ -304,20 +334,22 @@ class Undirected(Classifier):
         xTrain, yTrain = self.xTrain, self.yTrain
         xTest, yTest = self.xTest, self.yTest
         numOfCat = self.numOfCat
+        # gen classifiers
         clfList, allSet = self.generateClassifiers(xTrain, yTrain, xTest, yTest, trainOn)
         predScores = []
         yTestFiltered = []
         currIndex = 0
+        # predict labels for each doc
         for doc in range(0, len(xTest) / numOfCat):
             docScores = self.predictSample(xTest, yTest, doc, clfList, allSet, trainOn, epsilon)
             for i in range(0, numOfCat):
+                # optional: exclude scores
                 if yTest.trueScore[currIndex] not in self.excludeScores:
                     yTestFiltered.append(yTest.score[currIndex])
                     predScores.append(docScores[i])
                 currIndex += 1
 
-        mainKey = '-1'
-        clf = dict(clfList)[mainKey]
+        # print results
         titles = {'all': 'Pairwise-trained by all aspects',
          'aspect': 'Pairwise-trained by aspect'}
         self.printRes(titles[trainOn], np.array(predScores), yTestFiltered)
@@ -356,24 +388,22 @@ class Undirected(Classifier):
         P = [0 for i in range(self.numOfCat)]
 
         # iterate over equation
-        binC = 0
         while (1):
             for cat in range(self.numOfCat):
                 P[cat] = 0
                 divider = 0
                 for j in perms[cat]:
                     for bin in [0,1]:
+                        # trainOn parameter defines which classifiers to use
                         if trainOn == 'all':
                             key = '-1,{0}:{1}'.format(j,bin)
                         elif trainOn == 'aspect':
                             key = '-1,{0}:{1},T:{2}'.format(j,bin,cat)
-                        # sum
                         mult = probs[j][bin]
                         if bin == 0:
                             mult = mult * 1
-                        #P[cat] += (probs[j][binC])*clfDict[key].predict_proba(x[cat])
+                        # sum
                         P[cat] += mult*clfDict[key].predict_proba(x[cat])
-                        #divider += (probs[j][binC])
                         divider += mult
                 # normalize
                 P[cat] = P[cat] / divider
@@ -429,15 +459,17 @@ class Undirected(Classifier):
         p = Pipe()
         baseSet = [('-1', (xTrain, yTrain))]
         allSet = copy.deepcopy(baseSet)
+        # generate training set tuples
         self.genTuples(xTrain, yTrain, allSet, trainOn)
         clfList = []
+        # generate classifiers
         for tup in allSet:
+            # optional: balancing
             if self.balancing:
                 x,y = balancing(tup[1][0],tup[1][1])
             else:
                 x,y = tup[1][0],tup[1][1]
             clf = p.svmpipeline.fit(x,y.score)
-            #clf = p.svmpipeline.fit(tup[1][0], tup[1][1].score)
             clfList.append((tup[0], copy.deepcopy(clf)))
         return (dict(clfList), dict(allSet))
 
@@ -447,6 +479,7 @@ class Undirected(Classifier):
             and corresponding tuple (id, clf)
             and appends them to dictionaries
         """
+        # case 1, train on all paragraphs
         translator = [False, True]
         if trainOn == 'all':
             for cat in range(0, self.numOfCat):
@@ -458,9 +491,11 @@ class Undirected(Classifier):
                     multi_delete(newX, badIndexes)
                     newY.removeItems(badIndexes)
                     allSet.append((key, (newX, newY)))
-
+        
+        # case 2, training on specified paragraphs (Aspect=aspect)
         elif trainOn == 'aspect':
             order = []
+            # list of order(s) of required training set, e.g [B,C,D]
             for i in range(self.numOfCat):
                 curOrder = [ a for a in range(self.numOfCat) if a != i ]
                 order.append(curOrder)
@@ -503,45 +538,57 @@ class NormaClassifier(Classifier):
         p = Pipe()
         clf = p.svmpipeline.fit(xTrain, yTrain.trueScore)
         predicted = clf.predict(xTest)
+
+        # gets scores (by doc) for train
         scoresTrain = [ [0,0,0,0] for i in range(docsTrain) ]
         for i in range(0, len(xTrain)):
             scoresTrain[yTrain.doc[i]][catDict[yTrain.cat[i]]] = yTrain.trueScore[i]
 
+        # get scores (by doc) for test 
         scoresTest = [ [0,0,0,0] for i in range(docsTest) ]
         for i in range(0, len(xTest)):
             scoresTest[yTest.doc[i]][catDict[yTest.cat[i]]] = predicted[i]
 
         fixScores = [ [0,0,0,0] for i in range(docsTest) ]
         fixedPredicted = [ [0,0,0,0] for i in range(docsTest) ]
+
+        # iterate over all test set
         for i in range(0, len(scoresTest)):
             a = np.array(scoresTest[i])
             weightSum = 0
             tempFixScore = [0,0,0,0]
+            # find the norma to 'avg' score in training set
             for j in range(0, len(scoresTrain)):
                 b = np.array(scoresTrain[j])
                 weight = np.linalg.norm(a - b)
+                # add weights
                 if weight == 0:
                     weight = 8
                 else:
                     weight = (float(1) / weight) ** 3
                 weightSum += weight
+                # apply weight for score
                 weightedScore = [ weight * s for s in scoresTrain[j] ]
                 tempFixScore = [ a + b for a, b in zip(tempFixScore, weightedScore) ]
 
             fixScores[i] = [ float(a) / weightSum for a in tempFixScore ]
+            # fix predicted scores
             fixedPredicted[i] = [ float(0.05 * a) + float(0.95 * b) for a, b in zip(fixScores[i], scoresTest[i]) ]
 
+        # convert back to paragraphs list
         newPredicted = []
         for i in range(0, len(fixedPredicted)):
             for j in range(0, 4):
                 newPredicted.append(fixedPredicted[i][j])
-
+        
+        # transform to true/false
         for i in range(0, len(newPredicted)):
             if newPredicted[i] >= 5:
                 newPredicted[i] = True
             else:
                 newPredicted[i] = False
 
+        # show results
         newPredicted = np.array(newPredicted)
         self.printRes('Norma CLF: SVM-SmoothedScore', newPredicted, yTest.score)
 
