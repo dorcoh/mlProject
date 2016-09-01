@@ -1,16 +1,18 @@
 # Machine Learning Project
 
-We had a data of dvd-reviews, with multiple aspect for each review (Movie,Extras,Audio,Video) and scores, 
-our goal was to implement sentiment analysis classifiers for each aspect, and an aspect classifier.
+##Goal: 
+
+to implement sentiment analysis classifier, with multiple aspects
+
+Data: Dvd
+
+
+
+We had a data of dvd-reviews, with multiple aspect for each review (Movie,Extras,Audio,Video) and scores for each one of the aspects, our goal was to implement sentiment analysis classifiers for each aspect, and an aspect classifier.
 
 We first implemented as baseline three classifiers using scikit-learn library
 
-Then we implemented a 'norma' classifier, which checks how far is some review in the test set 
-<<<<<<< HEAD
-from all other training reviews in terms of scores (1-10).
-=======
-from all other training reviews in terms of rating (1-10).
->>>>>>> bee4a57802988793bad8f2e457245168b4b7cfff
+Then we implemented a 'norma' classifier, which checks how far is some review in the test set from all other training reviews in terms of scores (1-10).
 
 And finally we implemented three more classifiers assisted by the material we learned at the course (PGM)
 where the difference between them are the kind of dependecies between the variables
