@@ -13,7 +13,7 @@ First implemented as baseline three svm classifiers (aspect classifier, sentimen
 
 Another 'norma' classifier, which checks how far is some review in the test set from all other training reviews in terms of scores (1-10).
 
-And finally different classifiers using probabilistic graphs, one directed model, and two undicreted.
+And finally three custom classifiers using probabilistic graphs, one directed model, and two undicreted.
 
 Results so far:
 ```
