@@ -616,10 +616,29 @@ class SvmClassifier(Classifier):
         xTrain, yTrain = self.xTrain, self.yTrain
         xTest, yTest = self.xTest, self.yTest
         p = Pipe()
-        
+        """
+        # aspect classifier
         clf = p.svmpipeline.fit(xTrain, yTrain.cat)
         predicted = clf.predict(xTest)
         self.printRes('SVM-category', predicted, yTest.cat, catList)
+        
+        # sentiment classifier (trained on rating)
+        clf = p.svmpipeline.fit(xTrain, yTrain.trueScore)
+        predicted = clf.predict(xTest)
+        yTestFiltered = []
+        predictedNew = []
+        for i in range(0, len(predicted)):
+            if predicted[i] >= 5:
+                predicted[i] = True
+            else:
+                predicted[i] = False
+            if yTest.trueScore[i] not in self.excludeScores:
+                yTestFiltered.append(yTest.score[i])
+                predictedNew.append(predicted[i])
+
+        self.printRes('SVM-score (Trained on rating: 1-10)', np.array(predictedNew), np.array(yTestFiltered)) 
+        """
+        # sentiment classifier (trained on sentiment - True/False)
         if self.balancing:
             x,y = balancing(xTrain,yTrain)
         else:
@@ -634,19 +653,13 @@ class SvmClassifier(Classifier):
                 yTestFiltered.append(yTest.score[i])
                 predictedNew.append(predicted[i])
 
+        missDict = dict.fromkeys([i for i in range(0,11)],0)
+        print missDict
+        for i in range(len(predicted)):
+            if predicted[i] != yTest.score[i]:
+                missDict[yTest.trueScore[i]] += 1
+        
         self.printRes('SVM-score (Trained on score)', np.array(predictedNew), np.array(yTestFiltered))
         
-        clf = p.svmpipeline.fit(xTrain, yTrain.trueScore)
-        predicted = clf.predict(xTest)
-        yTestFiltered = []
-        predictedNew = []
-        for i in range(0, len(predicted)):
-            if predicted[i] >= 5:
-                predicted[i] = True
-            else:
-                predicted[i] = False
-            if yTest.trueScore[i] not in self.excludeScores:
-                yTestFiltered.append(yTest.score[i])
-                predictedNew.append(predicted[i])
+        return missDict
 
-        self.printRes('SVM-score (Trained on rating: 1-10)', np.array(predictedNew), np.array(yTestFiltered))

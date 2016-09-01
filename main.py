@@ -7,7 +7,7 @@ import itertools
 # Load classes and functions from our modules
 from DataStructures import TextData
 from Classifiers import Directed,Undirected,NormaClassifier,SvmClassifier
-from Analyze import plotStats, outVar
+from Analyze import plotStats, outVar, plotMissHistogram, plotRatioHistogram
 
 """  Main function """
 
@@ -21,6 +21,8 @@ if __name__ == '__main__':
     xTrain, yTrain, numDocsTrain = trainData.x, trainData.y, trainData.docs
     xTest, yTest, numDocsTest = testData.x, testData.y, testData.docs
     
+    # ANALYZE DATA AND ASSUMPTION CHECKING
+    # can uncomment to see plots
     """
     pos,neg = 0,0
     for i in range(len(xTrain)):
@@ -28,37 +30,48 @@ if __name__ == '__main__':
             neg += 1
         else:
             pos += 1
+    ratioDict = {
+                    "Pos(Score>5)": float(pos)/len(xTrain), 
+                    "Neg(Score<=5)": float(neg)/len(xTrain)
+                }
+    # pos/neg ratio
+    plotRatioHistogram(ratioDict)
 
-    print pos,neg
-    print "Pos:{0}, Neg:{1}".format(float(pos)/len(xTrain),float(neg)/len(xTrain))
+    # variance
+    plotStats(xTrain,yTrain,numDocsTrain,xTest,yTest,numDocsTest)
+    # 'real' variance
+    print outVar(xTrain,yTrain)
     """
-    # analyzing data and assumption checking
-    #plotStats(xTrain,yTrain,numDocsTrain,xTest,yTest,numDocsTest)
-    #print outVar(xTrain,yTrain)
-
     # parameters for classifiers
     # exclude scores in this list
     exc = [5,6]
     # balance the classifiers (True/False ratio)
-    bal = False
+    bal = True
 
     print "Classifying: Excluding scores:{0}, balancing:{1}".format(
            exc,bal)
 
     # classify
     svm = SvmClassifier(xTrain,yTrain,xTest,yTest,exc,bal)
-    svm.classify(catList=testData.catCat)
+    missDict = svm.classify(catList=testData.catCat)
 
+    # analyze misses of svm classifier
+    #plotMissHistogram(missDict)
+
+    # norma classifier
     #norma = NormaClassifier(xTrain,yTrain,xTest,yTest)
     #norma.classify(numDocsTrain,numDocsTest)
     
+    # directed classifier
     dirClf = Directed(xTrain,yTrain,xTest,yTest,exc,bal)
-
-    # tune dependencies in dirClf
-    #for o in list(itertools.permutations([0,1,2,3])):
-        #print o
-        #dirClf.classify(order=list(o),verb=False)
     dirClf.classify([0,1,2,3],verb=False)
+
+    # tune dependencies order in dirClf
+    """ 
+    for o in list(itertools.permutations([0,1,2,3])):
+        print o
+    dirClf.classify(order=list(o),verb=False)
+    """
 
     udirClf = Undirected(xTrain,yTrain,xTest,yTest,exc,bal)
     udirClf.classify(trainOn='all',epsilon=0.0001)

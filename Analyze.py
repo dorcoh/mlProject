@@ -54,8 +54,8 @@ def printStats(x,y,docs):
     for i in range(0, len(var)):
         var[i] = float(var[i]) / (numPar[i]-1)
 
-    histVar, binsVar = np.histogram(var, bins=40, range=(0,20), density=True)
-    histDiff, binsDiff = np.histogram(diff, bins=40, range=(-10.0,10.0), density=True)
+    histVar, binsVar = np.histogram(var, bins=40, range=(0,20), density=False)
+    histDiff, binsDiff = np.histogram(diff, bins=40, range=(-10.0,10.0), density=False)
 
     return histVar,binsVar,histDiff,binsDiff
 
@@ -78,24 +78,34 @@ def outVar(x,y):
 
 def plotStats(xTrain,yTrain,docsTrain,xTest,yTest,docsTest):
     # plot stats
-    f, axarr = plt.subplots(2)
+    #f, axarr = plt.subplots(2)
 
     # train data
     histVar, binsVar, histDiff, binsDiff = printStats(xTrain,yTrain,docsTrain)
 
-    # subplot
-    axarr[0].bar(binsVar[:-1], histVar, width=0.5)
-    axarr[0].set_title("Training - Variance")
-    axarr[0].set_xlabel("Score's variance")
-    axarr[0].set_ylabel("Probability")
-    axarr[0].set_ylim([0, 0.5])
-    axarr[1].bar(binsDiff[:-1], histDiff, width=0.5)
-    axarr[1].set_title("Training - Difference")
-    axarr[1].set_xlabel("Score's diff")
-    axarr[1].set_ylabel("Probability")
-    axarr[1].set_ylim([0, 0.5])
-    
-    # plot
-    plt.setp([a.get_xticklabels() for a in axarr[0:]], visible=False)
-    plt.suptitle("Assumption checking: Paragraph scores are dependent on avg score (of it's document)")
+    # plot histogram
+    plt.bar(binsVar[:-1],histVar,width=0.5)
+    plt.title("Training set - scores variance")
+    plt.xlabel("Score's variance")
+    plt.ylabel("Occurences")
+    plt.show()
+
+def plotMissHistogram(missDict):
+    plt.bar(missDict.keys(),missDict.values(),width=1,color="g")
+    plt.title("Miss histogram (by rating)")
+    plt.xlabel("Rating")
+    plt.ylabel("Misses")
+    plt.show()
+
+def plotRatioHistogram(ratioDict):
+    keys = tuple(ratioDict.keys())
+    vals = ratioDict.values()
+    yVal = np.asarray(vals)
+    yPos = np.arange(len(keys))
+
+    plt.barh(yPos,yVal,align='center',alpha=0.4)
+    plt.yticks(yPos,keys)
+    plt.xlabel("Perecent")
+    plt.title("Positive-Negative Ratio in training set")
+
     plt.show()
