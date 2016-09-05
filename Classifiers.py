@@ -3,6 +3,8 @@
 """
 import copy
 import numpy as np
+import itertools
+from math import log
 from sklearn import metrics
 from DataStructures import Feature
 from DataStructures import TextData
@@ -29,6 +31,9 @@ class Classifier:
         self.excludeScores = exclude
         # a flag for balancing
         self.balancing = balance
+        # aspect classifier
+        p = Pipe()
+        self.aspectClf = p.svmpipeline.fit(xTrain, yTrain.cat)
 
     def filterData(self, x, y, cat, value, requiredCat = None):
         """
@@ -119,6 +124,28 @@ class Classifier:
         print
         return acc
 
+    def getOrder(self,doc):
+        """
+            In: document (4 paragraphs)
+            Out: predicted aspects order, e.g [0,1,2,3]
+        """
+        probs = []
+        # get probabilities
+        for para in doc:
+            res = self.aspectClf.predict_proba(para)
+            probs.append(res)
+        perms = list(itertools.permutations([0,1,2,3]))
+        maxprob = 0
+        maxperm = perms[0]
+        # find max probability
+        for p in perms:
+            currProb = log(probs[p[0]][0][0]) + log(probs[p[1]][0][1]) + log(probs[p[2]][0][2]) + log(probs[p[3]][0][3])
+            if currProb>maxprob :
+                maxprob = currProb
+                maxperm = p
+        #print maxperm
+        return list(maxperm)
+        #return [0,2,1,3]
 
 class Directed(Classifier):
 
@@ -311,6 +338,15 @@ class Directed(Classifier):
 
 class Undirected(Classifier):
 
+    def __init__(self,xTrain, yTrain, xTest, yTest,params,
+                            exclude=[], balance=False):
+        # call base constructor
+        Classifier.__init__(self, xTrain, yTrain, xTest, yTest,
+                            exclude, balance)
+        # get parameters
+        self.params = params
+
+
     def classify(self, trainOn, epsilon = 0.0001):
         """
             This functions classifies all samples
@@ -352,7 +388,8 @@ class Undirected(Classifier):
         # print results
         titles = {'all': 'Pairwise-trained by all aspects',
          'aspect': 'Pairwise-trained by aspect'}
-        self.printRes(titles[trainOn], np.array(predScores), yTestFiltered)
+        acc = self.printRes(titles[trainOn], np.array(predScores), yTestFiltered)
+        return acc
 
     def predictSample(self,xTest,yTest,docId,clfDict,setsDict,trainOn,epsilon):
         """
@@ -365,11 +402,13 @@ class Undirected(Classifier):
         """
 
         # append all paragraphs of document to x
-        order = [0,1,2,3]
+        
+        params = self.params
         x = []
-        for i in order:
+        for i in [0,1,2,3]:
             data,labels = self.chooseSample(xTest,yTest,docId,i)
             x.append(data) 
+        order = self.getOrder(x)
 
         mainKey = '-1'
         clf = clfDict[mainKey]
@@ -392,21 +431,21 @@ class Undirected(Classifier):
             for cat in range(self.numOfCat):
                 P[cat] = 0
                 divider = 0
-                for j in perms[cat]:
+                for j in range(3):
                     for bin in [0,1]:
                         # trainOn parameter defines which classifiers to use
                         if trainOn == 'all':
-                            key = '-1,{0}:{1}'.format(j,bin)
+                            key = '-1,{0}:{1}'.format(perms[cat][j],bin)
                         elif trainOn == 'aspect':
-                            key = '-1,{0}:{1},T:{2}'.format(j,bin,cat)
-                        mult = probs[j][bin]
+                            key = '-1,{0}:{1},T:{2}'.format(perms[cat][j],bin,cat)
+                        mult = probs[perms[cat][j]][bin]
                         if bin == 0:
                             mult = mult * 1
                         # sum
-                        P[cat] += mult*clfDict[key].predict_proba(x[cat])
+                        P[cat] += params[cat][j]*mult*clfDict[key].predict_proba(x[order[cat]])
                         divider += mult
                 # normalize
-                P[cat] = P[cat] / divider
+                P[cat] = P[cat] / (divider/3)
             
             # compute norma
             a = [probs[i][0] for i in range(self.numOfCat)]
@@ -432,7 +471,12 @@ class Undirected(Classifier):
             else:
                 result[i] = True
 
-        return result
+        # recreate right order
+        newResult = [None for i in range(self.numOfCat)]
+        for i in range(4):
+            newResult[order[i]] = result[i]
+        
+        return newResult
 
     def generateClassifiers(self, xTrain, yTrain, xTest, yTest, trainOn):
         """
@@ -654,11 +698,16 @@ class SvmClassifier(Classifier):
                 predictedNew.append(predicted[i])
 
         missDict = dict.fromkeys([i for i in range(0,11)],0)
+        occDict = dict.fromkeys([i for i in range(0,11)],0)
         print missDict
         for i in range(len(predicted)):
+            occDict[yTest.trueScore[i]] += 1
             if predicted[i] != yTest.score[i]:
                 missDict[yTest.trueScore[i]] += 1
         
+        for key in missDict:
+            missDict[key] = missDict[key] / float(occDict[key])
+
         self.printRes('SVM-score (Trained on score)', np.array(predictedNew), np.array(yTestFiltered))
         
         return missDict

@@ -219,6 +219,10 @@ def balancing(x,y):
         smaller = False
     else:
         return x,y
+    
+    if fCount==0 or tCount==0 :
+         return x,y
+
     ftratio = float(fCount)/tCount
     # Positive is smaller
     length = len(x)
