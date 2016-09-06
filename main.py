@@ -43,9 +43,9 @@ if __name__ == '__main__':
     # parameters for classifiers
     
     # exclude scores in this list
-    exc = []
+    exc = [5,6]
     # balance the classifiers (True/False ratio)
-    bal = False
+    bal = True
 
     print "Classifying: Excluding scores:{0}, balancing:{1}".format(
            exc,bal)
