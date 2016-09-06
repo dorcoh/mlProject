@@ -195,6 +195,8 @@ class Directed(Classifier):
             for key in missDict:
                 print 'Key:{0}, Misses:{1}'.format(key, missDict[key])
 
+        return acc
+
     def predictSample(self, xTest, yTest, docId, clfDict, setsDict, missDict, order):
         """
             This function predicts label for a single sample (document)
@@ -660,7 +662,7 @@ class SvmClassifier(Classifier):
         xTrain, yTrain = self.xTrain, self.yTrain
         xTest, yTest = self.xTest, self.yTest
         p = Pipe()
-        """
+
         # aspect classifier
         clf = p.svmpipeline.fit(xTrain, yTrain.cat)
         predicted = clf.predict(xTest)
@@ -681,7 +683,7 @@ class SvmClassifier(Classifier):
                 predictedNew.append(predicted[i])
 
         self.printRes('SVM-score (Trained on rating: 1-10)', np.array(predictedNew), np.array(yTestFiltered)) 
-        """
+
         # sentiment classifier (trained on sentiment - True/False)
         if self.balancing:
             x,y = balancing(xTrain,yTrain)
@@ -689,26 +691,31 @@ class SvmClassifier(Classifier):
             x,y = xTrain, yTrain
         clf = p.svmpipeline.fit(x, y.score)
 
+
         predicted = clf.predict(xTest)
         yTestFiltered = []
         predictedNew = []
+        # exclude chosen results (excludeScores)
         for i in range(0, len(predicted)):
             if yTest.trueScore[i] not in self.excludeScores:
                 yTestFiltered.append(yTest.score[i])
                 predictedNew.append(predicted[i])
 
+        # compute misses / occurences
         missDict = dict.fromkeys([i for i in range(0,11)],0)
         occDict = dict.fromkeys([i for i in range(0,11)],0)
-        print missDict
-        for i in range(len(predicted)):
+
+        for i in range(len(predictedNew)):
             occDict[yTest.trueScore[i]] += 1
-            if predicted[i] != yTest.score[i]:
+            if predictedNew[i] != yTestFiltered[i]:
                 missDict[yTest.trueScore[i]] += 1
         
+        # normalize misses
         for key in missDict:
             missDict[key] = missDict[key] / float(occDict[key])
 
+        # print results
         self.printRes('SVM-score (Trained on score)', np.array(predictedNew), np.array(yTestFiltered))
         
-        return missDict
+        return occDict
 

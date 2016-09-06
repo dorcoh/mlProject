@@ -1,8 +1,6 @@
 """
     This module was used for assumption checking
-    We wanted to check how the scores are dependent on the avg
-    in order to implement the norma classifier
-    (Described in Classifiers module)
+    and analyzing the data
 """
 
 import numpy as np
@@ -91,10 +89,10 @@ def plotStats(xTrain,yTrain,docsTrain,xTest,yTest,docsTest):
     plt.show()
 
 def plotMissHistogram(missDict):
-    plt.bar(missDict.keys(),missDict.values(),width=1,color="g")
-    plt.title("Miss histogram (by rating)")
+    plt.bar(missDict.keys(),missDict.values(),width=1,color="b")
+    plt.title("Occurences histogram (by rating)")
     plt.xlabel("Rating")
-    plt.ylabel("Misses")
+    plt.ylabel("Occurences")
     plt.show()
 
 def plotRatioHistogram(ratioDict):
@@ -109,3 +107,20 @@ def plotRatioHistogram(ratioDict):
     plt.title("Positive-Negative Ratio in training set")
 
     plt.show()
+
+def posNegRatio(xTrain,yTrain):
+    """
+        Compute and plot negative/positive ratio in train set
+    """
+    pos,neg = 0,0
+    for i in range(len(xTrain)):
+        if yTrain.score[i] == False:
+            neg += 1
+        else:
+            pos += 1
+    ratioDict = {
+                    "Pos(Score>5)": float(pos)/len(xTrain), 
+                    "Neg(Score<=5)": float(neg)/len(xTrain)
+                }
+    # pos/neg ratio
+    plotRatioHistogram(ratioDict)

@@ -1,0 +1,2859 @@
+Classifying: Excluding scores:[5, 6], balancing:True
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 59  61]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 59  61]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 59  61]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 59  61]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 58  62]
+ [  8 333]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 58  62]
+ [  8 333]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 58  62]
+ [  8 333]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 58  62]
+ [  8 333]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 57  63]
+ [  7 334]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.85032537961
+Confusion Matrix:
+[[ 57  63]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.85032537961
+Confusion Matrix:
+[[ 57  63]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.85032537961
+Confusion Matrix:
+[[ 57  63]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.85032537961
+Confusion Matrix:
+[[ 57  63]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.843817787419
+Confusion Matrix:
+[[ 53  67]
+ [  5 336]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.843817787419
+Confusion Matrix:
+[[ 53  67]
+ [  5 336]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.843817787419
+Confusion Matrix:
+[[ 53  67]
+ [  5 336]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.843817787419
+Confusion Matrix:
+[[ 53  67]
+ [  5 336]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.848156182213
+Confusion Matrix:
+[[ 56  64]
+ [  6 335]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.85032537961
+Confusion Matrix:
+[[ 59  61]
+ [  8 333]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.85032537961
+Confusion Matrix:
+[[ 59  61]
+ [  8 333]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.85032537961
+Confusion Matrix:
+[[ 59  61]
+ [  8 333]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.85032537961
+Confusion Matrix:
+[[ 59  61]
+ [  8 333]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.85032537961
+Confusion Matrix:
+[[ 60  60]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.85032537961
+Confusion Matrix:
+[[ 60  60]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.85032537961
+Confusion Matrix:
+[[ 60  60]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.85032537961
+Confusion Matrix:
+[[ 60  60]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.852494577007
+Confusion Matrix:
+[[ 61  59]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.852494577007
+Confusion Matrix:
+[[ 61  59]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.852494577007
+Confusion Matrix:
+[[ 61  59]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.852494577007
+Confusion Matrix:
+[[ 61  59]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 63  57]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 63  57]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 63  57]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 63  57]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 63  57]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 63  57]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 63  57]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 63  57]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 64  56]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 64  56]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 64  56]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 64  56]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 64  56]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 64  56]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 64  56]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 64  56]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.854663774403
+Confusion Matrix:
+[[ 62  58]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 67  53]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 67  53]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 67  53]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 67  53]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 65  55]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 65  55]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 65  55]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 65  55]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 66  54]
+ [ 10 331]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.863340563991
+Confusion Matrix:
+[[ 66  54]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.861171366594
+Confusion Matrix:
+[[ 65  55]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.859002169197
+Confusion Matrix:
+[[ 64  56]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.8568329718
+Confusion Matrix:
+[[ 63  57]
+ [  9 332]]
+
+______________________
+Pairwise-trained by aspect
+______________________
+Acc=0.9
+Confusion Matrix:
+[[ 30  15]
+ [  5 150]]
+
+Correct params: [[0.0, 0.46666666666666656, 0.5333333333333333], [0.0, 0.0, 1.0], [0.3, 0.3, 0.4], [0.3, 0.3, 0.4]]
+21387.7190092
