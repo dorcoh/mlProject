@@ -88,11 +88,11 @@ def plotStats(xTrain,yTrain,docsTrain,xTest,yTest,docsTest):
     plt.ylabel("Occurences")
     plt.show()
 
-def plotMissHistogram(missDict):
-    plt.bar(missDict.keys(),missDict.values(),width=1,color="b")
+def plotHistogram(Dict):
+    plt.bar(Dict.keys(),Dict.values(),width=1,color="b")
     plt.title("Occurences histogram (by rating)")
     plt.xlabel("Rating")
-    plt.ylabel("Occurences")
+    plt.ylabel("Occurences %")
     plt.show()
 
 def plotRatioHistogram(ratioDict):

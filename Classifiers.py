@@ -714,8 +714,12 @@ class SvmClassifier(Classifier):
         for key in missDict:
             missDict[key] = missDict[key] / float(occDict[key])
 
+        # normalize occurences
+        for key in occDict:
+            occDict[key] = occDict[key] / float(len(predictedNew))
+
         # print results
         self.printRes('SVM-score (Trained on score)', np.array(predictedNew), np.array(yTestFiltered))
         
-        return occDict
+        return missDict,occDict
 

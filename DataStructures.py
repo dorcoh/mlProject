@@ -178,6 +178,10 @@ class TextData:
             return True
 
 class Pipe:
+    """
+        Implements an SVM/naive bayes pipeline
+        Using scikit-learn library
+    """
     def __init__(self):
         self.svmpipeline = Pipeline([
             ('vect', CountVectorizer()),
