@@ -1,5 +1,57 @@
 Classifying: Excluding scores:[], balancing:True
 ______________________
+SVM-category
+______________________
+Acc=0.988461538462
+Confusion Matrix:
+[[64  0  1  0]
+ [ 0 63  2  0]
+ [ 0  0 65  0]
+ [ 0  0  0 65]]
+Classification Report:
+             precision    recall  f1-score   support
+
+      movie       1.00      0.98      0.99        65
+     extras       1.00      0.97      0.98        65
+      video       0.96      1.00      0.98        65
+      audio       1.00      1.00      1.00        65
+
+avg / total       0.99      0.99      0.99       260
+
+
+______________________
+SVM-score (Trained on rating: 1-10)
+______________________
+Acc=0.730769230769
+Confusion Matrix:
+[[  0  70]
+ [  0 190]]
+
+______________________
+SVM-score (Trained on score)
+______________________
+Acc=0.838461538462
+Confusion Matrix:
+[[ 34  36]
+ [  6 184]]
+
+______________________
+One-direction-dependency
+______________________
+Acc=0.819230769231
+Confusion Matrix:
+[[ 43  27]
+ [ 20 170]]
+
+______________________
+Pairwise-trained by all aspects
+______________________
+Acc=0.830769230769
+Confusion Matrix:
+[[ 48  22]
+ [ 22 168]]
+
+______________________
 Pairwise-trained by aspect
 ______________________
 Acc=0.85
